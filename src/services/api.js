@@ -21,4 +21,10 @@ const getMovieDetails = async (movieId) => {
   return data;
 };
 
-export { getPopularMovies, searchMovies, getMovieDetails };
+const getMovieVideo = async (movieId) => {
+  const response = await axios.get(`${BASE_URL}/movie/${movieId}/videos?api_key=${API_KEY}`);
+  const data = await response.data;
+  return data;
+};
+
+export { getPopularMovies, searchMovies, getMovieDetails, getMovieVideo };
