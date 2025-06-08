@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getMovieDetails } from "../services/api"; // Assuming you have a function to fetch movie details
+import Backdrop from "../components/Backdrop";
+
 
 function MovieDetails() {
     const { id } = useParams();
@@ -32,7 +34,7 @@ function MovieDetails() {
 
             {loading ? <p>Loading...</p> :
                 <div>
-                    <h1>Movie Details</h1>
+                    <Backdrop key={movieDetails.id} movie={movieDetails} />
                 </div>
             }
         </div>
