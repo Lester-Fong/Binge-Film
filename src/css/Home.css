@@ -9,6 +9,7 @@
   justify-content: center;
   align-items: center;
   gap: 1rem;
+  padding: 1rem 3rem;
 }
 
 .search-form {
@@ -61,10 +62,12 @@
 }
 
 .movies-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 340px));
-  gap: 1.5rem;
-  padding: 1rem;
-  width: 100%;
-  box-sizing: border-box;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 342px));
+    gap: 1.5rem;
+    width: 100%;
+    margin: 0 auto;
+    padding: 1rem 3rem;
+    text-align: center;
+    box-sizing: border-box;
 }
