@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import MovieCard from "../components/MovieCard";
 import { getPopularMovies, searchMovies } from "../services/api";
 import '../css/Home.css'
@@ -47,6 +48,7 @@ function Home() {
         setSearchQuery("");
     }
 
+
     return <>
 
         <form onSubmit={handleSearch} className="d-flex-center">
@@ -64,7 +66,9 @@ function Home() {
             </div> :
             <div className="movies-grid">
                 {movies.map(item =>
-                    <MovieCard key={item.id} movie={item} />
+                    <Link to={`/movie/${item.id}`} key={item.id} className="movie-link">
+                        <MovieCard key={item.id} movie={item} />
+                    </Link>
                 )}
             </div>}
     </>
