@@ -1,15 +1,19 @@
 import "../css/MovieDetails.css";
 import { handleDate } from "../services/helper";
-import { useMovieContext } from '../contexts/MovieContext';
-import { getMovieVideo } from "../services/api"; 
-import {embedMovie} from "../services/api.v2"; // Assuming you have a function to embed the movie
+import { useMovieContext } from "../contexts/MovieContext";
+import { getMovieVideo } from "../services/api";
+import { embedMovie } from "../services/api.v2"; // Assuming you have a function to embed the movie
 import { useState } from "react";
 
-function Backdrop(props) {
+import { Modal } from 'flowbite-react';
+// import Modal from "./Modal";
 
+function Backdrop(props) {
     const { isFavorite, addToFavorites, removeToFavorites } = useMovieContext();
     const favorite = isFavorite(props.movie.id);
     const [embedVideo, setEmbedVideo] = useState(null);
+    const [videoKey, setVideoKey] = useState(null);
+    const [showModal, setShowModal] = useState(false);
 
     const onFavoriteClick = (e) => {
         e.preventDefault();
@@ -18,19 +22,22 @@ function Backdrop(props) {
         } else {
             addToFavorites(props.movie);
         }
-    }
+    };
 
     const handlePlayTrailer = async (e) => {
         e.preventDefault();
         const response = await getMovieVideo(props.movie.id);
         let results = response.results;
         if (results.length > 0) {
-            results = results.filter(video => video.site === "YouTube" && video.type === "Trailer");
-            window.open(`https://www.youtube.com/watch?v=${results[0].key}`, "_blank");
+            results = results.filter((video) => video.site === "YouTube" && video.type === "Trailer");
+            // window.open(`https://www.youtube.com/watch?v=${results[0].key}`, "_blank");
+            // embed the video in a modal
+            setShowModal(true)
+            setVideoKey(results[0].key)
         } else {
             alert("No video available for this movie.");
         }
-    }
+    };
 
     const handlePlayFilm = async (e) => {
         e.preventDefault();
@@ -38,7 +45,7 @@ function Backdrop(props) {
         setEmbedVideo(response);
 
         // TODO: Make the video player modal appear and embed the response from API
-    }
+    };
 
     return (
         <>
@@ -50,12 +57,14 @@ function Backdrop(props) {
 
                     <div className="backdrop-content">
                         <div>
-                            <h1 className="backdrop-title">{props.movie.title} ({props.movie?.release_date.split('-')[0]})</h1>
+                            <h1 className="backdrop-title">
+                                {props.movie.title} ({props.movie?.release_date.split("-")[0]})
+                            </h1>
                             <p>Tagline: &nbsp; "{props.movie.tagline}"</p>
                             <p>Release Date: {handleDate(props.movie.release_date)}</p>
                         </div>
                         <div className="backdrop-icons">
-                            <div className="watch-btn  pointer" onClick={handlePlayFilm}>
+                            <div className="watch-btn pointer" onClick={handlePlayFilm}>
                                 <span className="mb-0">
                                     <svg height="30px" width="30px" version="1.1" id="_x32_" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512" xmlSpace="preserve" fill="#000000">
                                         <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
@@ -75,7 +84,7 @@ function Backdrop(props) {
                                 </span>
                                 <span>Watch Film</span>
                             </div>
-                            <div className="watch-btn  pointer" onClick={handlePlayTrailer}>
+                            <div className="watch-btn pointer" onClick={handlePlayTrailer}>
                                 <span className="mb-0">
                                     <svg height="30px" width="30px" version="1.1" id="_x32_" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512" xmlSpace="preserve" fill="#000000">
                                         <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
@@ -95,8 +104,8 @@ function Backdrop(props) {
                                 </span>
                                 <span>Watch Trailer</span>
                             </div>
-                             <span onClick={onFavoriteClick}>
-                                <p className={`favorite-btn-deets ${favorite ? 'active' : ''}`} onClick={onFavoriteClick}>♥</p>
+                            <span onClick={onFavoriteClick}>
+                                <p className={`favorite-btn-deets ${favorite ? "active" : ""}`}>♥</p>
                             </span>
                         </div>
                         <div className="backdrop-overview">
@@ -104,12 +113,40 @@ function Backdrop(props) {
                             <p>It provides a summary of the plot and main themes. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos fugiat laudantium similique.</p>
                         </div>
                         <div>
-                            <a className="homepage-link" href={props.movie.homepage} target="_blank">Visit movie page</a>
+                            <a className="homepage-link" href={props.movie.homepage} target="_blank">
+                                Visit movie page
+                            </a>
                         </div>
                     </div>
                 </div>
-
             </div>
+
+
+            <Modal show={showModal} onClose={() => setShowModal(false)}>
+
+                <div className="video-container">
+                    <div className="bg-gray-900 text-white rounded-t-lg">
+                        <h3 className="text-lg text-center font-semibold py-1">{props.movie.title}</h3>
+                    </div>
+                    {videoKey ? (
+                        <iframe
+                            title="Movie Trailer"
+                            width="100%"
+                            height="100%"
+                            src={`https://www.youtube.com/embed/${videoKey}`}
+                            frameBorder="0"
+                            allowFullScreen
+                        ></iframe>
+                    ) : (
+                        <p>Loading video...</p>
+                    )}
+                </div>
+                <div className="flex justify-end align-bottom mx-2 my-1">
+                    <button className="close-button" onClick={() => setShowModal(false)}>
+                        Close
+                    </button>
+                </div>
+            </Modal>
         </>
     );
 }
