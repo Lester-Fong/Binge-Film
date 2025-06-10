@@ -44,8 +44,6 @@ function Backdrop(props) {
         const response = await embedMovie(props.movie.imdb_id);
         setEmbedVideo(response);
         setShowFilmModal(true)
-
-        // TODO: Make the video player modal appear and embed the response from API
     };
 
     return (
