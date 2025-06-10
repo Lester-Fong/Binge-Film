@@ -2,18 +2,18 @@ import "../css/MovieDetails.css";
 import { handleDate } from "../services/helper";
 import { useMovieContext } from "../contexts/MovieContext";
 import { getMovieVideo } from "../services/api";
-import { embedMovie } from "../services/api.v2"; // Assuming you have a function to embed the movie
+import { embedMovie } from "../services/api.v2";
 import { useState } from "react";
-
-import { Modal } from 'flowbite-react';
-// import Modal from "./Modal";
+import TrailerModal from "./TrailerModal";
+import FilmModal from "./FilmModal";
 
 function Backdrop(props) {
     const { isFavorite, addToFavorites, removeToFavorites } = useMovieContext();
     const favorite = isFavorite(props.movie.id);
     const [embedVideo, setEmbedVideo] = useState(null);
     const [videoKey, setVideoKey] = useState(null);
-    const [showModal, setShowModal] = useState(false);
+    const [showTrailerModal, setShowTrailerModal] = useState(false);
+    const [showFilmModal, setShowFilmModal] = useState(false);
 
     const onFavoriteClick = (e) => {
         e.preventDefault();
@@ -32,7 +32,7 @@ function Backdrop(props) {
             results = results.filter((video) => video.site === "YouTube" && video.type === "Trailer");
             // window.open(`https://www.youtube.com/watch?v=${results[0].key}`, "_blank");
             // embed the video in a modal
-            setShowModal(true)
+            setShowTrailerModal(true)
             setVideoKey(results[0].key)
         } else {
             alert("No video available for this movie.");
@@ -43,6 +43,7 @@ function Backdrop(props) {
         e.preventDefault();
         const response = await embedMovie(props.movie.imdb_id);
         setEmbedVideo(response);
+        setShowFilmModal(true)
 
         // TODO: Make the video player modal appear and embed the response from API
     };
@@ -121,32 +122,8 @@ function Backdrop(props) {
                 </div>
             </div>
 
-
-            <Modal show={showModal} onClose={() => setShowModal(false)}>
-
-                <div className="video-container">
-                    <div className="bg-gray-900 text-white rounded-t-lg">
-                        <h3 className="text-lg text-center font-semibold py-1">{props.movie.title}</h3>
-                    </div>
-                    {videoKey ? (
-                        <iframe
-                            title="Movie Trailer"
-                            width="100%"
-                            height="100%"
-                            src={`https://www.youtube.com/embed/${videoKey}`}
-                            frameBorder="0"
-                            allowFullScreen
-                        ></iframe>
-                    ) : (
-                        <p>Loading video...</p>
-                    )}
-                </div>
-                <div className="flex justify-end align-bottom mx-2 my-1">
-                    <button className="close-button" onClick={() => setShowModal(false)}>
-                        Close
-                    </button>
-                </div>
-            </Modal>
+            <TrailerModal showTrailerModal={showTrailerModal} setShowTrailerModal={setShowTrailerModal} props={props} videoKey={videoKey} />
+            <FilmModal showFilmModal={showFilmModal} setShowFilmModal={setShowFilmModal} props={props} response={embedVideo} />
         </>
     );
 }
