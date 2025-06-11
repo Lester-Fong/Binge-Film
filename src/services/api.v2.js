@@ -9,7 +9,6 @@ const getPopularMovies = async (pageCount) => {
 
 const embedMovie = async (movieID) => {
   const response = await axios.get(`${EMBED_MOVIES_ENDPOINT}?imdb=${movieID}&ds_lang=de`);
-  console.log("Embed response:", response);
   return response.data;
 };
 
