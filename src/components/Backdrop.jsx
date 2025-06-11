@@ -26,24 +26,38 @@ function Backdrop(props) {
 
     const handlePlayTrailer = async (e) => {
         e.preventDefault();
-        const response = await getMovieVideo(props.movie.id);
-        let results = response.results;
-        if (results.length > 0) {
-            results = results.filter((video) => video.site === "YouTube" && video.type === "Trailer");
-            // window.open(`https://www.youtube.com/watch?v=${results[0].key}`, "_blank");
-            // embed the video in a modal
-            setShowTrailerModal(true)
-            setVideoKey(results[0].key)
-        } else {
-            alert("No video available for this movie.");
+        try {
+            const response = await getMovieVideo(props.movie.id);
+            let results = response.results;
+            if (results.length > 0) {
+                results = results.filter((video) => video.site === "YouTube" && video.type === "Trailer");
+                // window.open(`https://www.youtube.com/watch?v=${results[0].key}`, "_blank");
+                // embed the video in a modal
+                setShowTrailerModal(true)
+                setVideoKey(results[0].key)
+            } else {
+                alert("No video available for this movie.");
+            }
+        } catch (error) {
+            console.error("Error fetching movie video:", error);
+            alert("Failed to load the trailer. Please try again later.");
+            setShowTrailerModal(false);
+            setVideoKey(null);
         }
     };
 
     const handlePlayFilm = async (e) => {
         e.preventDefault();
-        const response = await embedMovie(props.movie.imdb_id);
-        setEmbedVideo(response);
-        setShowFilmModal(true)
+        try {
+            const response = await embedMovie(props.movie.imdb_id);
+            setEmbedVideo(response);
+            setShowFilmModal(true)
+        } catch (error) {
+            console.error("Error fetching film embed:", error);
+            alert("Failed to load the film. Please try again later.");
+            setShowFilmModal(false);
+            setEmbedVideo(null);
+        }
     };
 
     return (
