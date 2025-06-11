@@ -1,6 +1,7 @@
 import '../css/Favorites.css'
 import { useMovieContext } from '../contexts/MovieContext';
 import MovieCard from '../components/MovieCard';
+import { Link } from 'react-router-dom';
 
 function Favorites() {
     const { favorites } = useMovieContext();
@@ -10,7 +11,9 @@ function Favorites() {
             <h2>Your Favorites</h2>
             <div className="movies-grid">
                 {favorites.map(item =>
-                    <MovieCard key={item.id} movie={item} />
+                    <Link to={`/movie/${item.id}`} key={item.id} className="movie-link">
+                        <MovieCard key={item.id} movie={item} />
+                    </Link>
                 )}
             </div>
         </div>
