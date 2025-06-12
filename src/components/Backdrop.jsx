@@ -76,7 +76,7 @@ function Backdrop(props) {
                             <p>Tagline: &nbsp; "{props.movie.tagline}"</p>
                             <p>Release Date: {handleDate(props.movie.release_date)}</p>
                         </div>
-                        <div className="backdrop-icons">
+                        <div className="backdrop-icons justify-center">
                             <div className="watch-btn pointer" onClick={handlePlayFilm}>
                                 <span className="mb-0">
                                     <svg height="30px" width="30px" version="1.1" id="_x32_" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512" xmlSpace="preserve" fill="#000000">
@@ -123,7 +123,7 @@ function Backdrop(props) {
                         </div>
                         <div className="backdrop-overview">
                             <h2 className="mb-1">Overview</h2>
-                            <p>It provides a summary of the plot and main themes. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos fugiat laudantium similique.</p>
+                            <p>{props.movie.overview}</p>
                         </div>
                         <div>
                             <a className="homepage-link" href={props.movie.homepage} target="_blank">
