@@ -1,0 +1,34 @@
+.featured-movie {
+  position: relative;
+  width: 100%;
+  height: 100vh !important;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.featured-movie::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 5;
+  width: 100%;
+  height: 100%;
+  background: #000f17;
+  background: linear-gradient(90deg, rgba(0, 15, 23, 1) 0%, rgba(0, 15, 23, 0.13) 100%);
+}
+.featured-movie > * {
+  position: relative;
+  z-index: 10;
+  color: #fff;
+}
+
+.featured-movie-content {
+  position: absolute;
+  top: 50%;
+  left: 6%;
+  transform: translate(-6%, -50%);
+  text-align: start;
+  width: 35%;
+}
