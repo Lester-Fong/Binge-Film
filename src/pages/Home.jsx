@@ -1,21 +1,27 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import MovieCard from "../components/MovieCard";
-import { getPopularMovies, searchMovies } from "../services/api";
+import { getPopularMovies, getFeaturedMovie } from "../services/api";
 import '../css/Home.css'
-
+import FeaturedMovie from "../components/FeaturedMovie";
 
 function Home() {
-    const [searchQuery, setSearchQuery] = useState("");
     const [movies, setMovies] = useState([]);
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [featuredMovie, setFeaturedMovie] = useState(null);
 
     useEffect(() => {
         const loadPopularMovies = async () => {
             try {
-                const popularMovies = await getPopularMovies();
+                const response = Promise.all([
+                    getPopularMovies(),
+                    getFeaturedMovie()
+                ]);
+
+                const [popularMovies, featureMovie] = await response;
                 setMovies(popularMovies);
+                setFeaturedMovie(featureMovie);
             } catch (error) {
                 console.error("Error fetching popular movies:", error);
                 setError("Failed to load popular movies.");
@@ -27,44 +33,24 @@ function Home() {
         loadPopularMovies();
     }, []);
 
-    const handleSearch = async (event) => {
-        event.preventDefault();
-
-        if (!searchQuery.trim()) return;
-        setLoading(true);
-        if (loading) return;
-
-        try {
-            const searchedMovies = await searchMovies(searchQuery);
-            setMovies(searchedMovies);
-            setError(null);
-        } catch (error) {
-            console.error("Error searching movies:", error);
-            setError("Failed to search for movies.");
-        } finally {
-            setLoading(false);
-        }
-
-        setSearchQuery("");
-    }
 
 
     return <>
+        {/* Featured Movie */}
+        {featuredMovie && (
+            <FeaturedMovie movie={featuredMovie} />
+            // <Backdrop movie={featuredMovie} />
+        )}
 
-        <form onSubmit={handleSearch} className="d-flex-center">
-            <input type="text" placeholder="search for movies" className="search-input" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} />
-            <button type="submit" className="search-button">Search</button>
-        </form>
-
-        {error && <div className="error-message" role="alert">{error}</div>}
-
+        {/* Error Message */}
+        {error && <div className="error-message absolute top-6/12 left-5/12" role="alert">{error}</div>}
         {loading ?
-            <div className="d-flex justify-content-center align-items-center" style={{ height: "100vh" }}>
+            <div className="absolute top-6/12 left-6/12" style={{ height: "100vh" }}>
                 <div className="spinner-border text-primary" role="status">
-                    <p className="loading">Loading...</p>
+                    <p className="loading">LOADING...</p>
                 </div>
             </div> :
-            <div className="movies-grid">
+            <div className="movies-grid mt-5">
                 {movies.map(item =>
                     <Link to={`/movie/${item.id}`} key={item.id} className="movie-link">
                         <MovieCard key={item.id} movie={item} />
