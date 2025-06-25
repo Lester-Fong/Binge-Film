@@ -61,7 +61,7 @@ function SearchModal({ showSearchModal, setShowSearchModal }) {
                 <form className="search-form">
                     <input type="text" value={searchValue} onChange={handleSearch} placeholder="Search for movies or TV shows..." className="search-input w-full p-2 rounded" />
                 </form>
-                {errorMessage && <div className="text-red-500 mt-2">{errorMessage}</div>}
+                {errorMessage && <div className="text-red-500 mt-2 text-center">{errorMessage}</div>}
                 {movies.length > 0 && (
                     <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 px-2 py-2">
                         {movies.map(movie => (
