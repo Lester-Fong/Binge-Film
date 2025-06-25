@@ -4,6 +4,7 @@ import MovieCard from "../components/MovieCard";
 import { getPopularMovies, getFeaturedMovie } from "../services/api";
 import '../css/Home.css'
 import FeaturedMovie from "../components/FeaturedMovie";
+import { MovieSlidesSection } from "../components/MovieSlidesSection";
 
 function Home() {
     const [movies, setMovies] = useState([]);
@@ -50,13 +51,17 @@ function Home() {
                     <p className="loading">LOADING...</p>
                 </div>
             </div> :
-            <div className="movies-grid mt-5">
-                {movies.map(item =>
-                    <Link to={`/movie/${item.id}`} key={item.id} className="movie-link">
-                        <MovieCard key={item.id} movie={item} />
-                    </Link>
-                )}
-            </div>}
+            // <div className="movies-grid mt-5">
+            //     {movies.map(item =>
+            //         <Link to={`/movie/${item.id}`} key={item.id} className="movie-link">
+            //             <MovieCard key={item.id} movie={item} />
+            //         </Link>
+            //     )}
+
+            // </div>
+            <MovieSlidesSection movies={movies} />
+        }
+        {/* Latest Movies */}
     </>
 }
 
