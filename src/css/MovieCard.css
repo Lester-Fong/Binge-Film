@@ -1,12 +1,14 @@
 .movie-card {
   position: relative;
-  border-radius: 30px;
+  border-radius: 13px;
   overflow: hidden;
-  background-color: #1a1a1a;
+  background-color: transparent;
+  border: 0;
   transition: transform 0.2s;
-  height: 100%;
   display: flex;
   flex-direction: column;
+  width: clamp(240px, 100%, 240px);
+  height: 100%;
 }
 
 .movie-card:hover {
@@ -14,14 +16,14 @@
 }
 .movie-poster {
   position: relative;
-  aspect-ratio: 2/3;
   width: 100%;
+  height: 300px;
 }
 
 .movie-poster img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  /* object-fit: cover; */
 }
 
 .movie-overlay {
@@ -82,23 +84,26 @@
   padding: 0.5rem;
   flex: 1;
   display: flex;
-  flex-direction: column;
+  /* flex-direction: column; */
   gap: 0.5rem;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .movie-info h3 {
-  font-size: 1rem;
+  font-size: 0.8rem;
   margin: 0;
   color: #fff;
   font-family: "Montserrat", sans-serif !important;
   font-weight: 600;
-  text-transform: uppercase;
+  text-transform: capitalize;
   line-height: normal;
 }
 
-.movie-info p {
+.movie-date {
+  padding: 0 0.5rem;
   color: #999;
-  font-size: 0.9rem;
+  font-size: 0.75rem;
   font-family: "Oswald", sans-serif !important;
 }
 
