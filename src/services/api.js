@@ -10,6 +10,20 @@ const getPopularMovies = async () => {
   return data.results;
 };
 
+// For TopRated Movies
+const getTopRatedMovies = async () => {
+  const response = await axios.get(`${BASE_URL}/movie/top_rated?api_key=${API_KEY}`);
+  const data = await response.data;
+  return data.results;
+};
+
+// For Trending Movies
+const getTrendingMovies = async () => {
+  const response = await axios.get(`${BASE_URL}/trending/movie/day?api_key=${API_KEY}`);
+  const data = await response.data;
+  return data.results;
+};
+
 // For Searching of Movies
 const searchMovies = async (query) => {
   const response = await axios.get(`${BASE_URL}/search/movie?api_key=${API_KEY}&query=${encodeURIComponent(query)}`);
@@ -37,4 +51,4 @@ const getFeaturedMovie = async () => {
   return data.results[0];
 };
 
-export { getPopularMovies, searchMovies, getMovieDetails, getMovieVideo, getFeaturedMovie };
+export { getPopularMovies, searchMovies, getMovieDetails, getMovieVideo, getFeaturedMovie, getTopRatedMovies, getTrendingMovies };
