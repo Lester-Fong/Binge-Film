@@ -1,13 +1,15 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import MovieCard from "../components/MovieCard";
-import { getPopularMovies, getFeaturedMovie } from "../services/api";
+import { getPopularMovies, getFeaturedMovie, getTopRatedMovies, getTrendingMovies } from "../services/api";
 import '../css/Home.css'
 import FeaturedMovie from "../components/FeaturedMovie";
 import { MovieSlidesSection } from "../components/MovieSlidesSection";
 
 function Home() {
     const [movies, setMovies] = useState([]);
+    const [topRatedMovies, setTopRatedMovies] = useState([]);
+    const [trendingMovies, setTrendingMovies] = useState([]);
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(true);
     const [featuredMovie, setFeaturedMovie] = useState(null);
@@ -17,12 +19,16 @@ function Home() {
             try {
                 const response = Promise.all([
                     getPopularMovies(),
-                    getFeaturedMovie()
+                    getFeaturedMovie(),
+                    getTopRatedMovies(),
+                    getTrendingMovies()
                 ]);
 
-                const [popularMovies, featureMovie] = await response;
+                const [popularMovies, featureMovie, topMovies, trendingMovies] = await response;
                 setMovies(popularMovies);
                 setFeaturedMovie(featureMovie);
+                setTopRatedMovies(topMovies);
+                setTrendingMovies(trendingMovies);
             } catch (error) {
                 console.error("Error fetching popular movies:", error);
                 setError("Failed to load popular movies.");
@@ -48,18 +54,14 @@ function Home() {
         {loading ?
             <div className="absolute top-6/12 left-6/12" style={{ height: "100vh" }}>
                 <div className="spinner-border text-primary" role="status">
-                    <p className="loading">LOADING...</p>
+                    <p className="loading text-white">LOADING...</p>
                 </div>
             </div> :
-            // <div className="movies-grid mt-5">
-            //     {movies.map(item =>
-            //         <Link to={`/movie/${item.id}`} key={item.id} className="movie-link">
-            //             <MovieCard key={item.id} movie={item} />
-            //         </Link>
-            //     )}
-
-            // </div>
-            <MovieSlidesSection movies={movies} />
+            <>
+                <MovieSlidesSection movies={movies} />
+                <MovieSlidesSection movies={topRatedMovies} section_title="Top Rated Movies" />
+                <MovieSlidesSection movies={trendingMovies} section_title="Trending Movies" />
+            </>
         }
         {/* Latest Movies */}
     </>
