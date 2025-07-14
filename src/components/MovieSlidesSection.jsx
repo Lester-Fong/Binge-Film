@@ -23,7 +23,7 @@ function MovieSlidesSection({ movies, section_title = "Popular Movies" }) {
                 Autoplay({
                     delay: 1700000,
                 }),
-            ]} className="mx-5 mb-5">
+            ]} className="mx-5 mb-2">
                 <div className="ml-2">
                     <CarouselContent className="-ml-2">
                         {movies.map((item, index) => (
@@ -41,8 +41,8 @@ function MovieSlidesSection({ movies, section_title = "Popular Movies" }) {
                         ))}
                     </CarouselContent>
                 </div>
-                <CarouselPrevious />
-                <CarouselNext />
+                <CarouselPrevious className="text-yellow-100 hover:text-stone-100" />
+                <CarouselNext className="text-yellow-100 hover:text-stone-100" />
             </Carousel>
         </div>
     )
