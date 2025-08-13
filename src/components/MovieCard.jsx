@@ -28,10 +28,12 @@ export default function MovieCard({ movie }) {
                 </div>
             </div>
             <div className="movie-info">
-                <h3>{truncateText(movie.title, 15)}</h3>
-                <Badge variant="destructive" className="px-1">{movie.vote_average.toFixed(1)}</Badge>
+                <h3>{truncateText(movie.title, 25)}</h3>
+                <div className="flex align-items-center justify-between">
+                    <Badge variant="destructive" className="px-1">{movie.vote_average.toFixed(1)}</Badge>
+                    <p className='movie-date'>{movie.release_date.split('-')[0]}</p>
+                </div>
             </div>
-            <p className='movie-date mb-1'>{movie.release_date.split('-')[0]}</p>
         </div>
     </>
 }
