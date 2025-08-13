@@ -1,51 +1,57 @@
-import { Card, CardContent } from "@/components/ui/card"
-import {
-    Carousel,
-    CarouselContent,
-    CarouselItem,
-    CarouselNext,
-    CarouselPrevious,
-} from "@/components/ui/carousel"
-import { Link } from "react-router-dom"
-import MovieCard from "./MovieCard"
-import Autoplay from "embla-carousel-autoplay"
+import React from "react";
+import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext } from "./ui/carousel";
+import { Link } from "react-router-dom";
+import MovieCard from "./MovieCard";
+import "../css/MovieSlidesSection.css";
 
-function MovieSlidesSection({ movies, section_title = "Popular Movies" }) {
+const MovieSlidesSection = ({ title, movies }) => {
     return (
-        <div className="px-5">
-            <div className="text-4xl font-bold my-4 ml-2 px-5">
-                <p>{section_title}</p>
+        <div className="movie-slides-section">
+            <div className="text-4xl font-bold mt-4 mb-2 ml-2 px-5">
+                <p>{title}</p>
             </div>
-            <Carousel opts={{
-                align: "start",
-                loop: true,
-            }} plugins={[
-                Autoplay({
-                    delay: 1700000,
-                }),
-            ]} className="mx-5 mb-2">
+            <div className="mx-5 mb-2">
                 <div className="ml-2">
-                    <CarouselContent className="-ml-2">
-                        {movies.map((item, index) => (
-                            <CarouselItem key={index} className="md:basis-1/4 lg:basis-2/12 flex">
-                                <div>
-                                    <Card className="movie-card">
-                                        <CardContent className="flex aspect-square items-center justify-center p-6">
-                                            <Link to={`/movie/${item.id}`} key={item.id} className="movie-link w-100">
-                                                <MovieCard key={item.id} movie={item} />
+                    <Carousel
+                        opts={{
+                            align: "start",
+                            loop: true,
+                            skipSnaps: false,
+                            dragFree: true,
+                        }}
+                        className="w-full"
+                    >
+                        <CarouselContent className="movie-slides-carousel-content">
+                            {movies.map((movie) => (
+                                <CarouselItem
+                                    key={movie.id}
+                                    className="movie-slides-carousel-item"
+                                >
+                                    <div className="movie-slides-card-container">
+                                        <div className="movie-slides-card-content">
+                                            <Link
+                                                to={`/movie/${movie.id}`}
+                                                className="movie-slides-link"
+                                            >
+                                                <MovieCard
+                                                    poster={movie.poster_path}
+                                                    title={movie.title}
+                                                    rating={movie.vote_average}
+                                                    movie={movie}
+                                                />
                                             </Link>
-                                        </CardContent>
-                                    </Card>
-                                </div>
-                            </CarouselItem>
-                        ))}
-                    </CarouselContent>
+                                        </div>
+                                    </div>
+                                </CarouselItem>
+                            ))}
+                        </CarouselContent>
+                        <CarouselPrevious className="movie-slides-nav movie-slides-prev" />
+                        <CarouselNext className="movie-slides-nav movie-slides-next" />
+                    </Carousel>
                 </div>
-                <CarouselPrevious className="text-yellow-100 hover:text-stone-100" />
-                <CarouselNext className="text-yellow-100 hover:text-stone-100" />
-            </Carousel>
+            </div>
         </div>
-    )
-}
+    );
+};
 
-export { MovieSlidesSection }
+export default MovieSlidesSection;
