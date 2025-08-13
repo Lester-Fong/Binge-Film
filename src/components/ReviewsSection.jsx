@@ -83,7 +83,7 @@ function ReviewsSection({ reviews }) {
                 }}
                 className="mx-5 mb-2"
             >
-                <div className="ml-2">
+                <div className="">
                     <CarouselContent className="-ml-2">
                         {sortedReviews.map((review) => (
                             <CarouselItem
