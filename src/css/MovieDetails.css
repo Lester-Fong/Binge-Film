@@ -2,7 +2,7 @@
 
 .backdrop {
   width: 100%;
-  height: 90vh;
+  height: 99vh;
   background-size: cover;
   background-position: center;
   position: relative;
@@ -558,7 +558,7 @@ blockquote {
   }
 
   .backdrop-content {
-    padding: 1.5rem 0;
+    padding: 3.75rem 0;
     gap: 1rem;
     align-items: center;
   }
@@ -613,7 +613,7 @@ blockquote {
   }
 
   .backdrop-content {
-    padding: 1rem 0;
+    padding: 3.75rem 0;
     gap: 0.75rem;
     align-items: center;
   }
@@ -674,7 +674,7 @@ blockquote {
   }
 
   .backdrop-content {
-    padding: 0.75rem 0;
+    padding: 4.75rem 0;
     gap: 0.5rem;
   }
 
