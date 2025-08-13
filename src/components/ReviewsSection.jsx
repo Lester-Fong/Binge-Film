@@ -39,7 +39,7 @@ function ReviewsSection({ reviews }) {
                 </div>
 
                 <div className="mx-5 mb-2">
-                    <div className="ml-2">
+                    <div>
                         <div className="reviews-simple-grid">
                             {sortedReviews.map((review) => (
                                 <div key={review.id} className="review-simple-item">
