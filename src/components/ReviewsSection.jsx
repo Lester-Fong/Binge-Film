@@ -72,7 +72,7 @@ function ReviewsSection({ reviews }) {
 
     return (
         <div className="reviews-section px-5">
-            <div className="text-4xl font-bold my-4 ml-2 px-5">
+            <div className="text-4xl font-bold mt-4 mb-2 ml-2">
                 <p>User Reviews</p>
             </div>
 
