@@ -55,7 +55,7 @@ function FilmModal({ showFilmModal, setShowFilmModal, props, response }) {
     }, [response]);
 
     return (
-        <div showFilmModal={showFilmModal} onClose={() => setShowFilmModal(false)} className={`film-modal fixed inset-0 z-150 flex items-center justify-center bg-gray-900 bg-opacity-75 ${showFilmModal ? 'block' : 'hidden'}`}>
+        <div className={`film-modal fixed inset-0 z-150 flex items-center justify-center bg-gray-900 bg-opacity-75 ${showFilmModal ? 'block' : 'hidden'}`}>
             <button className="bg-yellow-600 absolute -top-px right-0 z-50 rounded-full" onClick={() => setShowFilmModal(false)}>
                 X
             </button>
