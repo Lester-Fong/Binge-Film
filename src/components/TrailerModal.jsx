@@ -6,7 +6,7 @@ function TrailerModal({ showTrailerModal, setShowTrailerModal, props, videoKey }
         <Modal show={showTrailerModal} onClose={() => setShowTrailerModal(false)}>
             <div className="trailer-container w-4xl">
                 <div className="bg-gray-900 text-white rounded-t-lg">
-                    <h3 className="text-lg text-center font-semibold py-1">{props.movie.title}</h3>
+                    <p className="text-center font-semibold py-1">{props.movie.title}</p>
                 </div>
                 {videoKey ? (
                     <iframe
