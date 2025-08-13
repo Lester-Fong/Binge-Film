@@ -44,10 +44,10 @@ function FeaturedMovie(props) {
     return (
         <div className="featured-movie" style={{ backgroundImage: `url(https://media.themoviedb.org/t/p/w1920_and_h800_multi_faces/${props.movie.backdrop_path})` }}>
             <div className='featured-movie-content'>
-                <h4 className='text-7xl mb-1'>{props.movie.title}</h4>
-                <p>Release Date: {handleDate(props.movie.release_date)}</p>
-                <p className='my-2 text-xl'>{props.movie.overview}</p>
-                <div className="backdrop-icons justify-start">
+                <h4 className='text-7xl lg:text-6xl md:text-5xl sm:text-4xl mb-1'>{props.movie.title}</h4>
+                <p className="text-sm md:text-base">Release Date: {handleDate(props.movie.release_date)}</p>
+                <p className='my-2 text-xl md:text-lg sm:text-base'>{props.movie.overview}</p>
+                <div className="backdrop-icons flex flex-wrap gap-3 sm:gap-2">
                     <Link className="watch-btn pointer" to={`/movie/${props.movie.id}`} >
                         <span className="mb-0">
                             <svg height="30px" width="30px" version="1.1" id="_x32_" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512" xmlSpace="preserve" fill="#000000">
