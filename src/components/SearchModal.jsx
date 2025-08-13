@@ -56,7 +56,7 @@ function SearchModal({ showSearchModal, setShowSearchModal }) {
 
     return (<>
         <div style={showSearchModal ? overlayStyle : {}} onClick={handleClose}></div>
-        <div onClose={() => setShowSearchModal(false)} style={modalStyle} className={`w-4/12 top-2/12 left-4/12 fixed z-150 ${showSearchModal ? 'block' : 'hidden'}`}>
+        <div onClose={() => setShowSearchModal(false)} style={modalStyle} className={`w-5/12 top-2/12 left-3/10 fixed z-150 ${showSearchModal ? 'block' : 'hidden'}`}>
             <div className="py-2">
                 <form className="search-form">
                     <input type="text" value={searchValue} onChange={handleSearch} placeholder="Search for movies or TV shows..." className="search-input w-full p-2 rounded" />
