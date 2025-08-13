@@ -1,0 +1,294 @@
+/* MovieSlidesSection.css - Responsive Carousel Slider */
+
+/* Base Section Styles */
+.movie-slides-section {
+  width: 100%;
+  margin-bottom: 2rem;
+}
+
+/* Keep original carousel content styles for backward compatibility */
+.movie-slides-carousel-content {
+  margin-left: -0.25rem; /* Reduced gap */
+}
+
+.movie-slides-carousel-item {
+  padding-left: 0.25rem; /* Reduced gap */
+  flex: 0 0 auto;
+}
+
+/* Navigation Buttons */
+.movie-slides-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fbbf24;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 10;
+  backdrop-filter: blur(5px);
+}
+
+.movie-slides-nav:hover {
+  background: rgba(0, 0, 0, 0.9);
+  color: #f5f5f5;
+  transform: translateY(-50%) scale(1.1);
+}
+
+.movie-slides-nav:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.movie-slides-nav:disabled:hover {
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.7);
+}
+
+.movie-slides-prev {
+  left: 0; /* Changed from -24px to 0 */
+}
+
+.movie-slides-next {
+  right: 0; /* Changed from -24px to 0 */
+}
+
+/* Responsive Carousel Items per View */
+
+/* Large Desktop (1400px and up) - 6 items */
+@media (min-width: 1400px) {
+  .movie-slides-carousel-item {
+    width: calc(100% / 6);
+    min-width: 0;
+  }
+
+  .movie-slides-title {
+    font-size: 2.5rem;
+    padding-left: 1.5rem; /* Consistent with larger padding */
+  }
+
+  .movie-slides-nav {
+    width: 52px;
+    height: 52px;
+  }
+
+  .movie-slides-carousel {
+    margin: 0 1.5rem 0.5rem 1.5rem; /* Increased margin for larger screens */
+    padding: 0 3.5rem;
+  }
+}
+
+/* Desktop (1200px to 1399px) - 5 items */
+@media (max-width: 1399px) and (min-width: 1200px) {
+  .movie-slides-carousel-item {
+    width: calc(100% / 5);
+    min-width: 0;
+  }
+
+  .movie-slides-title {
+    font-size: 2.25rem;
+    padding-left: 1.25rem; /* Keep base padding */
+  }
+}
+
+/* Medium Desktop (992px to 1199px) - 4 items */
+@media (max-width: 1199px) and (min-width: 992px) {
+  .movie-slides-carousel-item {
+    width: calc(100% / 4);
+    min-width: 0;
+  }
+
+  .movie-slides-title {
+    font-size: 2rem;
+    padding-left: 1rem; /* Slightly reduced for medium screens */
+  }
+} /* Tablet (768px to 991px) - 3 items */
+@media (max-width: 991px) and (min-width: 768px) {
+  .movie-slides-carousel-item {
+    width: calc(100% / 3);
+    min-width: 0;
+  }
+
+  .movie-slides-title {
+    font-size: 1.875rem;
+    margin: 1rem 0 1rem 0.25rem;
+    padding-left: 0.75rem; /* Consistent with Reviews section */
+  }
+
+  .movie-slides-carousel {
+    margin: 0 1rem 0.5rem 1rem; /* Match Reviews section pattern */
+    padding: 0 2.5rem;
+  }
+
+  .movie-slides-nav {
+    width: 44px;
+    height: 44px;
+  }
+}
+
+/* Mobile Landscape (576px to 767px) - 2.5 items */
+@media (max-width: 767px) and (min-width: 576px) {
+  .movie-slides-carousel-item {
+    width: calc(100% / 2.5);
+    min-width: 0;
+  }
+
+  .movie-slides-carousel {
+    margin: 0 0.75rem 0.5rem 0.75rem; /* Reduced margins for mobile */
+    padding: 0 2rem;
+  }
+  .movie-slides-nav {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+/* Mobile Portrait (575px and below) - 1.8 items */
+@media (max-width: 575px) and (min-width: 421px) {
+  .movie-slides-carousel-item {
+    width: calc(100% / 1.8);
+    min-width: 0;
+  }
+
+  .movie-slides-carousel {
+    margin: 0 0.5rem 0.5rem 0.5rem; /* Small margins for mobile */
+    padding: 0 1.5rem;
+  }
+
+  .movie-slides-nav {
+    width: 36px;
+    height: 36px;
+  }
+}
+
+/* Small Mobile (420px and below) - 1 item only */
+@media (max-width: 420px) {
+  .movie-slides-carousel-item {
+    width: 100%; /* Show only one card at a time */
+    min-width: 0;
+    display: flex;
+    justify-content: center; /* Center the card horizontally */
+  }
+
+  .movie-slides-carousel {
+    margin: 0 0.5rem 0.5rem 0.5rem; /* Reduced margins to give more space for the card */
+    padding: 0 2rem; /* Reduced padding for navigation buttons */
+  }
+
+  .movie-slides-nav {
+    width: 36px; /* Slightly smaller to give more space for the card */
+    height: 36px;
+    font-size: 0.9rem;
+  }
+
+  /* Center and resize the single card */
+  .movie-slides-carousel-content {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Center the carousel content */
+  }
+
+  /* Make the card container larger and centered */
+  .movie-slides-card-container {
+    max-width: 280px; /* Limit maximum width for very wide screens */
+    width: 90%; /* Use most of the available width */
+    display: flex;
+    justify-content: center;
+  }
+
+  /* Increase padding around the single card for better presentation */
+  .movie-slides-card-content {
+    /* padding: 0.5rem; More generous padding for single card view */
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+} /* Card Container Adjustments */
+.movie-slides-card-container {
+  height: 100%;
+  width: 100%;
+}
+
+.movie-slides-card-content {
+  /* padding: 0.125rem; Reduced from 0.375rem */
+  height: 100%;
+  display: flex;
+  align-items: stretch;
+}
+
+.movie-slides-link {
+  display: block;
+  width: 100%;
+  height: 100%;
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Mobile-specific card adjustments */
+@media (max-width: 767px) and (min-width: 421px) {
+  .movie-slides-card-content {
+    padding: 0.1rem; /* Reduced from 0.25rem */
+  }
+}
+
+@media (max-width: 420px) {
+  .movie-slides-card-content {
+    /* padding: 0.5rem; More generous padding for larger single card */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+/* Navigation arrows visibility - Keep visible for single card navigation */
+@media (max-width: 420px) {
+  .movie-slides-nav {
+    display: flex; /* Keep navigation visible for single card swiping */
+    background: rgba(0, 0, 0, 0.8); /* Slightly more opaque for better visibility */
+  }
+
+  .movie-slides-nav:hover {
+    background: rgba(0, 0, 0, 0.95);
+  }
+}
+
+/* Touch scroll indicators for mobile */
+@media (max-width: 480px) {
+  .movie-slides-carousel::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 20px;
+    background: linear-gradient(to left, rgba(0, 0, 0, 0.3), transparent);
+    pointer-events: none;
+    z-index: 5;
+  }
+}
+
+/* Smooth scrolling for touch devices */
+.movie-slides-carousel-content {
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Focus styles for accessibility */
+.movie-slides-nav:focus {
+  outline: 2px solid #fbbf24;
+  outline-offset: 2px;
+}
+
+/* High DPI displays */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .movie-slides-nav {
+    backdrop-filter: blur(8px);
+  }
+}

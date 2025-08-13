@@ -1,102 +1,232 @@
+/* Base Navbar Styles */
 .navbar {
   padding: 1rem 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
   background: transparent;
   position: fixed;
   top: 1rem;
   left: 50%;
   transform: translateX(-50%);
   width: 75%;
+  max-width: 1200px;
+  min-width: 320px;
   z-index: 20;
   backdrop-filter: blur(10px);
   color: white;
   border-radius: 30px !important;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  transition: background-color 0.3s, box-shadow 0.3s;
+  transition: all 0.3s ease;
 }
 
-nav > div > a {
+/* Brand/Logo */
+.navbar-brand {
+  font-size: 1.5rem;
+  font-weight: bold;
+  flex-shrink: 0;
+  z-index: 25;
+}
+
+.navbar-brand a {
   color: white;
   text-decoration: none;
-  font-weight: 500;
+  font-weight: 700;
   transition: color 0.3s;
   font-family: "Montserrat", sans-serif;
-  font-size: 1rem;
   letter-spacing: 0.05em;
 }
 
-.search-container {
+.navbar-brand a:hover {
+  color: #aadc08;
+}
+
+/* Desktop Navigation Links */
+.navbar-links {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+.nav-link {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  font-family: "Montserrat", sans-serif;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+}
+
+.nav-link:hover {
+  transform: scale(1.05);
+  color: #aadc08 !important;
+}
+
+/* Desktop Search Container */
+.search-container.desktop-search {
   margin: 0;
   padding: 0;
 }
 
 .search-form {
   max-width: 600px;
-  margin: 0 auto 0;
+  margin: 0;
   display: flex;
   gap: 1rem;
-  padding: 0 1rem;
+  padding: 0;
   box-sizing: border-box;
 }
 
 .search-input {
-  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
   padding: 0.5rem 1rem;
   border: none;
   border-radius: 20px;
   background-color: rgba(255, 255, 255, 0.1);
   color: white;
-  font-size: 1rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  white-space: nowrap;
 }
+
+.search-input:hover,
 .search-input:focus {
   outline: none;
   background-color: rgba(255, 255, 255, 0.2);
 }
 
-.search-button {
-  background-color: transparent;
-  border: none;
-  color: white;
+.search-input svg {
+  flex-shrink: 0;
+}
+
+/* Mobile Menu Toggle (Hamburger) */
+.mobile-menu-toggle {
+  display: none;
+  flex-direction: column;
   cursor: pointer;
+  z-index: 25;
   padding: 0.5rem;
-  font-size: 1rem;
 }
 
-.navbar-brand {
-  font-size: 1.5rem;
-  font-weight: bold;
-}
-
-.navbar-links {
+.hamburger {
   display: flex;
-  gap: 2rem;
+  flex-direction: column;
+  width: 24px;
+  height: 18px;
+  justify-content: space-between;
 }
 
-.nav-link {
+.hamburger span {
+  display: block;
+  height: 2px;
+  width: 100%;
+  background-color: white;
+  border-radius: 1px;
+  transition: all 0.3s ease;
+  transform-origin: center;
+}
+
+.hamburger-open span:nth-child(1) {
+  transform: rotate(45deg) translate(6px, 6px);
+}
+
+.hamburger-open span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger-open span:nth-child(3) {
+  transform: rotate(-45deg) translate(6px, -6px);
+}
+
+/* Mobile Search (hidden by default) */
+.mobile-search-container {
+  display: none;
+}
+
+.mobile-search-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  border-radius: 8px;
+  color: white;
   font-size: 1rem;
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
-  transition: background-color 0.2s;
-  transition: scale 0.4ms, color 0.2s;
-  color: #ffffff;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 100%;
 }
 
-.nav-link:hover {
-  scale: 1.05;
-  color: #aadc08 !important;
+.mobile-search-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
 }
 
-@media (max-width: 768px) {
+/* Mobile Menu Overlay */
+.mobile-menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 15;
+  backdrop-filter: blur(2px);
+}
+
+/* Responsive Breakpoints */
+
+/* Large Desktop (1200px and up) */
+@media (min-width: 1200px) {
   .navbar {
-    padding: 1rem;
+    width: 75%;
+    padding: 1rem 2.5rem;
+  }
+
+  .navbar-links {
+    gap: 2.5rem;
+  }
+
+  .nav-link {
+    font-size: 1.1rem;
+    padding: 0.5rem 1.2rem;
+  }
+}
+
+/* Desktop (992px to 1199px) */
+@media (max-width: 1199px) and (min-width: 992px) {
+  .navbar {
+    width: 85%;
+    padding: 1rem 2rem;
+  }
+
+  .navbar-links {
+    gap: 1.5rem;
+  }
+
+  .search-input {
+    font-size: 0.85rem;
+    padding: 0.4rem 0.8rem;
+  }
+}
+
+/* Tablet (768px to 991px) */
+@media (max-width: 991px) and (min-width: 768px) {
+  .navbar {
+    width: 90%;
+    padding: 1rem 1.5rem;
   }
 
   .navbar-brand {
-    font-size: 1.2rem;
+    font-size: 1.3rem;
   }
 
   .navbar-links {
@@ -104,6 +234,212 @@ nav > div > a {
   }
 
   .nav-link {
-    padding: 0.5rem;
+    font-size: 0.9rem;
+    padding: 0.4rem 0.8rem;
+  }
+
+  .search-input {
+    font-size: 0.8rem;
+    padding: 0.4rem 0.8rem;
+  }
+
+  .search-input span {
+    display: none; /* Hide search text on tablet */
+  }
+}
+
+/* Mobile Landscape (576px to 767px) */
+@media (max-width: 767px) and (min-width: 576px) {
+  .navbar {
+    width: 95%;
+    padding: 0.75rem 1rem;
+    top: 0.5rem;
+  }
+
+  .navbar-brand {
+    font-size: 1.2rem;
+  }
+
+  /* Hide desktop navigation and search */
+  .navbar-links {
+    display: none;
+  }
+
+  .search-container.desktop-search {
+    display: none;
+  }
+
+  /* Show mobile menu toggle */
+  .mobile-menu-toggle {
+    display: flex;
+  }
+
+  /* Mobile menu when open */
+  .navbar-links-mobile-open {
+    display: flex !important;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    background: rgba(0, 15, 23, 0.95);
+    backdrop-filter: blur(15px);
+    border-radius: 0 0 20px 20px;
+    padding: 1rem;
+    gap: 0.5rem;
+    z-index: 20;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    animation: slideDown 0.3s ease;
+  }
+
+  .navbar-links-mobile-open .nav-link {
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 1rem;
+  }
+
+  .navbar-links-mobile-open .nav-link:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: none;
+  }
+
+  /* Show mobile search in menu */
+  .navbar-links-mobile-open .mobile-search-container {
+    display: block;
+    margin-top: 0.5rem;
+  }
+}
+
+/* Mobile Portrait (575px and below) */
+@media (max-width: 575px) {
+  .navbar {
+    width: 95%;
+    padding: 0.75rem 1rem;
+    top: 0.5rem;
+    border-radius: 20px !important;
+  }
+
+  .navbar-brand {
+    font-size: 1.1rem;
+  }
+
+  .navbar-brand a {
+    font-size: 1.1rem;
+  }
+
+  /* Hide desktop navigation and search */
+  .navbar-links {
+    display: none;
+  }
+
+  .search-container.desktop-search {
+    display: none;
+  }
+
+  /* Show mobile menu toggle */
+  .mobile-menu-toggle {
+    display: flex;
+  }
+
+  .hamburger {
+    width: 20px;
+    height: 16px;
+  }
+
+  /* Mobile menu when open */
+  .navbar-links-mobile-open {
+    display: flex !important;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    background: rgba(0, 15, 23, 0.95);
+    backdrop-filter: blur(15px);
+    border-radius: 0 0 15px 15px;
+    padding: 1rem;
+    gap: 0.5rem;
+    z-index: 20;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    animation: slideDown 0.3s ease;
+  }
+
+  .navbar-links-mobile-open .nav-link {
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 0.95rem;
+  }
+
+  .navbar-links-mobile-open .nav-link:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: none;
+  }
+
+  /* Show mobile search in menu */
+  .navbar-links-mobile-open .mobile-search-container {
+    display: block;
+    margin-top: 0.5rem;
+  }
+
+  .mobile-search-btn {
+    font-size: 0.9rem;
+    padding: 0.7rem 1rem;
+  }
+}
+
+/* Extra Small Mobile (400px and below) */
+@media (max-width: 400px) {
+  .navbar {
+    width: 98%;
+    padding: 0.6rem 0.8rem;
+    top: 0.25rem;
+  }
+
+  .navbar-brand {
+    font-size: 1rem;
+  }
+
+  .hamburger {
+    width: 18px;
+    height: 14px;
+  }
+
+  .navbar-links-mobile-open {
+    padding: 0.8rem;
+  }
+
+  .navbar-links-mobile-open .nav-link {
+    padding: 0.6rem 0.8rem;
+    font-size: 0.9rem;
+  }
+
+  .mobile-search-btn {
+    font-size: 0.85rem;
+    padding: 0.6rem 0.8rem;
+  }
+}
+
+/* Animations */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* High DPI displays */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .navbar {
+    backdrop-filter: blur(12px);
+  }
+
+  .hamburger span {
+    height: 2.5px;
   }
 }

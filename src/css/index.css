@@ -203,3 +203,64 @@ button:focus-visible {
     @apply bg-background text-foreground;
   }
 }
+
+/* Responsive Title Styles */
+@media (max-width: 768px) {
+  .text-4xl {
+    font-size: 1.875rem !important; /* 30px */
+    line-height: 2.25rem !important;
+    text-align: center !important; /* Center titles on medium and smaller devices */
+  }
+}
+
+@media (max-width: 640px) {
+  .text-4xl {
+    font-size: 1.5rem !important; /* 24px */
+    line-height: 2rem !important;
+    text-align: center !important; /* Center titles */
+  }
+
+  .my-4 {
+    margin-top: 0.75rem !important;
+    margin-bottom: 0.75rem !important;
+  }
+
+  .px-5 {
+    padding-left: 0.75rem !important;
+    padding-right: 0.75rem !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .text-4xl {
+    font-size: 1.25rem !important; /* 20px */
+    line-height: 1.75rem !important;
+    text-align: center !important; /* Center titles */
+  }
+
+  .my-4 {
+    margin-top: 0.5rem !important;
+    margin-bottom: 0.5rem !important;
+  }
+
+  .px-5 {
+    padding-left: 0.5rem !important;
+    padding-right: 0.5rem !important;
+  }
+
+  .ml-2 {
+    margin-left: 0.25rem !important;
+  }
+}
+
+/* Center title containers on medium and smaller devices */
+@media (max-width: 768px) {
+  .text-4xl.font-bold.my-4.ml-2,
+  .text-4xl.font-bold.my-4.ml-2.px-5 {
+    margin-left: auto !important;
+    margin-right: auto !important;
+    display: flex !important;
+    justify-content: center !important;
+    width: 100% !important;
+  }
+}
