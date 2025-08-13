@@ -48,7 +48,21 @@ const getMovieVideo = async (movieId) => {
 const getFeaturedMovie = async () => {
   const response = await axios.get(`${BASE_URL}/trending/movie/day?api_key=${API_KEY}`);
   const data = await response.data;
-  return data.results[0];
+  return data.results;
 };
 
-export { getPopularMovies, searchMovies, getMovieDetails, getMovieVideo, getFeaturedMovie, getTopRatedMovies, getTrendingMovies };
+// For Similar Movies
+const getSimilarMovies = async (movieId) => {
+  const response = await axios.get(`${BASE_URL}/movie/${movieId}/similar?api_key=${API_KEY}`);
+  const data = await response.data;
+  return data.results;
+};
+
+// For Movie Reviews
+const getMovieReviews = async (movieId) => {
+  const response = await axios.get(`${BASE_URL}/movie/${movieId}/reviews?api_key=${API_KEY}`);
+  const data = await response.data;
+  return data;
+};
+
+export { getPopularMovies, searchMovies, getMovieDetails, getMovieVideo, getFeaturedMovie, getTopRatedMovies, getTrendingMovies, getSimilarMovies, getMovieReviews };
