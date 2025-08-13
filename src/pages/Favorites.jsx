@@ -19,9 +19,11 @@ function Favorites() {
         </div>
     }
     return <>
-        <div className="favorites-empty">
-            <h2>No Favorites movies yet.</h2>
-            <p>start adding to your favorites and they will appear here.</p>
+        <div className="flex flex-col items-center justify-center h-screen">
+            <div className="favorites-empty">
+                <h2>No Favorites movies yet.</h2>
+                <p>start adding to your favorites and they will appear here.</p>
+            </div>
         </div>
     </>
 }

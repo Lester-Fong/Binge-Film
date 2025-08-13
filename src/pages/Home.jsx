@@ -4,7 +4,8 @@ import MovieCard from "../components/MovieCard";
 import { getPopularMovies, getFeaturedMovie, getTopRatedMovies, getTrendingMovies } from "../services/api";
 import '../css/Home.css'
 import FeaturedMovie from "../components/FeaturedMovie";
-import { MovieSlidesSection } from "../components/MovieSlidesSection";
+import FeaturedMovieCarousel from "../components/FeaturedMovieCarousel";
+import MovieSlidesSection from "../components/MovieSlidesSection";
 
 function Home() {
     const [movies, setMovies] = useState([]);
@@ -43,10 +44,9 @@ function Home() {
 
 
     return <>
-        {/* Featured Movie */}
-        {featuredMovie && (
-            <FeaturedMovie movie={featuredMovie} />
-            // <Backdrop movie={featuredMovie} />
+        {/* Featured Movie Carousel */}
+        {featuredMovie && featuredMovie.length > 0 && (
+            <FeaturedMovieCarousel movies={featuredMovie} />
         )}
 
         {/* Error Message */}
@@ -58,9 +58,9 @@ function Home() {
                 </div>
             </div> :
             <>
-                <MovieSlidesSection movies={movies} />
-                <MovieSlidesSection movies={topRatedMovies} section_title="Top Rated Movies" />
-                <MovieSlidesSection movies={trendingMovies} section_title="Trending Movies" />
+                <MovieSlidesSection movies={movies} title="Popular Movies" />
+                <MovieSlidesSection movies={topRatedMovies} title="Top Rated Movies" />
+                <MovieSlidesSection movies={trendingMovies} title="Trending Movies" />
             </>
         }
         {/* Latest Movies */}
