@@ -30,16 +30,23 @@
 }
 
 .navbar-brand a {
-  color: white;
+  background: linear-gradient(135deg, #ffffff 0%, #aadc08 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
   text-decoration: none;
   font-weight: 700;
-  transition: color 0.3s;
+  transition: all 0.3s ease;
   font-family: "Montserrat", sans-serif;
   letter-spacing: 0.05em;
 }
 
 .navbar-brand a:hover {
-  color: #aadc08;
+  background: linear-gradient(135deg, #aadc08 0%, #ffffff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  transform: scale(1.05);
 }
 
 /* Desktop Navigation Links */
