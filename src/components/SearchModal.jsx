@@ -58,6 +58,7 @@ function SearchModal({ showSearchModal, setShowSearchModal }) {
         }
     }
 
+    // Add ref for input
     const inputRef = useRef(null);
 
     useEffect(() => {
