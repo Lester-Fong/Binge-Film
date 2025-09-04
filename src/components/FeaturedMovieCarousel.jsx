@@ -14,7 +14,7 @@ function FeaturedMovieCarousel({ movies }) {
             setCurrentIndex((prevIndex) =>
                 prevIndex === movies.length - 1 ? 0 : prevIndex + 1
             );
-        }, 5000); // Change slide every 5 seconds
+        }, 4500); // Change slide every 5 seconds
 
         return () => clearInterval(interval);
     }, [isAutoPlaying, movies]);

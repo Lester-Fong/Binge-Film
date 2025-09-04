@@ -68,7 +68,11 @@ function MovieDetails() {
 
                     {/* Similar Movies Section */}
                     {similarMoviesData && similarMoviesData.length > 0 && (
-                        <MovieSlidesSection movies={similarMoviesData} title="Similar Movies" />
+                        <MovieSlidesSection 
+                            movies={similarMoviesData} 
+                            title="Similar Movies" 
+                            contentType="movie"
+                        />
                     )}
                 </div>
             }
