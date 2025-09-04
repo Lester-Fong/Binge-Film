@@ -1,0 +1,326 @@
+/* TV Show Details Styles */
+.tv-show-details {
+    background-color: #0f172a;
+    color: white;
+    min-height: 100vh;
+}
+
+.loading-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #0f172a;
+}
+
+.loading-text {
+    color: white;
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+.tv-show-info-section {
+    background-color: #1e293b;
+    padding: 2rem 0;
+}
+
+.tv-show-poster-section {
+    display: flex;
+    justify-content: center;
+}
+
+.tv-show-poster {
+    width: 100%;
+    max-width: 400px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.tv-show-main-details {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.tv-show-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    color: #f1f5f9;
+}
+
+.tv-show-tagline {
+    font-style: italic;
+    font-size: 1.1rem;
+    color: #94a3b8;
+    margin-bottom: 1.5rem;
+}
+
+.tv-show-meta {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+    background-color: #334155;
+    padding: 1.5rem;
+    border-radius: 8px;
+}
+
+.meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.meta-label {
+    font-weight: 600;
+    color: #cbd5e1;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.meta-value {
+    font-size: 1rem;
+    color: white;
+    font-weight: 500;
+}
+
+.meta-value.rating {
+    color: #fbbf24;
+}
+
+.tv-show-genres,
+.tv-show-overview,
+.tv-show-networks,
+.tv-show-creators,
+.last-episode,
+.next-episode {
+    margin-bottom: 2rem;
+}
+
+.tv-show-genres h3,
+.tv-show-overview h3,
+.tv-show-networks h3,
+.tv-show-creators h3,
+.last-episode h3,
+.next-episode h3,
+.seasons-section h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: #f1f5f9;
+}
+
+.genre-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.genre-tag {
+    background-color: #3b82f6;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.tv-show-overview p {
+    line-height: 1.6;
+    color: #e2e8f0;
+    font-size: 1rem;
+}
+
+.network-logos {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: center;
+}
+
+.network-item {
+    background-color: white;
+    padding: 0.5rem;
+    border-radius: 8px;
+}
+
+.network-logo {
+    height: 40px;
+    object-fit: contain;
+}
+
+.network-name {
+    color: #1e293b;
+    font-weight: 500;
+    padding: 0.5rem;
+}
+
+.creators-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.creator-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    max-width: 120px;
+}
+
+.creator-photo {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 0.5rem;
+}
+
+.creator-name {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #e2e8f0;
+}
+
+.episode-card {
+    background-color: #334155;
+    padding: 1.5rem;
+    border-radius: 8px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 1rem;
+    align-items: start;
+}
+
+.episode-info h4 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: #f1f5f9;
+}
+
+.episode-date {
+    color: #94a3b8;
+    font-size: 0.875rem;
+    margin-bottom: 0.75rem;
+}
+
+.episode-overview {
+    color: #e2e8f0;
+    line-height: 1.5;
+}
+
+.episode-still {
+    width: 200px;
+    border-radius: 8px;
+}
+
+.seasons-section {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid #475569;
+}
+
+.seasons-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.season-card {
+    background-color: #334155;
+    border-radius: 8px;
+    padding: 1rem;
+    display: flex;
+    gap: 1rem;
+}
+
+.season-poster {
+    width: 80px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 6px;
+}
+
+.season-info {
+    flex: 1;
+}
+
+.season-info h4 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: #f1f5f9;
+}
+
+.season-episodes,
+.season-date,
+.season-rating {
+    color: #94a3b8;
+    font-size: 0.875rem;
+    margin-bottom: 0.25rem;
+}
+
+.season-rating {
+    color: #fbbf24;
+}
+
+.season-overview {
+    color: #e2e8f0;
+    font-size: 0.875rem;
+    line-height: 1.4;
+    margin-top: 0.5rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .tv-show-title {
+        font-size: 2rem;
+    }
+    
+    .episode-card {
+        grid-template-columns: 1fr;
+    }
+    
+    .episode-still {
+        width: 100%;
+        max-width: 300px;
+        justify-self: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .tv-show-meta {
+        grid-template-columns: 1fr;
+    }
+    
+    .season-card {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .season-poster {
+        width: 120px;
+        height: 180px;
+        align-self: center;
+    }
+}
+
+/* Error message styling */
+.error-message {
+    background-color: #ef4444;
+    color: white;
+    padding: 1rem;
+    border-radius: 8px;
+    text-align: center;
+    margin: 2rem;
+    font-weight: 500;
+}

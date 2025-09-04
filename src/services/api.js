@@ -32,9 +32,11 @@ const searchMovies = async (query) => {
 };
 
 // For Movie Details
-const getMovieDetails = async (movieId) => {
-  const response = await axios.get(`${BASE_URL}/movie/${movieId}?api_key=${API_KEY}`);
+const getMovieDetails = async (movieId, type) => {
+  const response = await axios.get(`${BASE_URL}/${type}/${movieId}?api_key=${API_KEY}`);
   const data = await response.data;
+  console.log(data);
+  
   return data;
 };
 
@@ -65,4 +67,52 @@ const getMovieReviews = async (movieId) => {
   return data;
 };
 
-export { getPopularMovies, searchMovies, getMovieDetails, getMovieVideo, getFeaturedMovie, getTopRatedMovies, getTrendingMovies, getSimilarMovies, getMovieReviews };
+
+// ============== TV SHOWS =============>
+const getPopularTVShows = async () => {
+  const response = await axios.get(`${BASE_URL}/tv/popular?api_key=${API_KEY}`);
+  const data = await response.data;
+  return data.results;
+};
+
+// For TV Show Details
+const getTVShowDetails = async (tvId) => {
+  const response = await axios.get(`${BASE_URL}/tv/${tvId}?api_key=${API_KEY}`);
+  const data = await response.data;
+  return data;
+};
+
+// For Similar TV Shows
+const getSimilarTVShows = async (tvId) => {
+  const response = await axios.get(`${BASE_URL}/tv/${tvId}/similar?api_key=${API_KEY}`);
+  const data = await response.data;
+  return data.results;
+};
+
+// For TV Show Reviews
+const getTVShowReviews = async (tvId) => {
+  const response = await axios.get(`${BASE_URL}/tv/${tvId}/reviews?api_key=${API_KEY}`);
+  const data = await response.data;
+  return data;
+};
+
+// For TV Show Videos/Trailers
+const getTVShowVideo = async (tvId) => {
+  const response = await axios.get(`${BASE_URL}/tv/${tvId}/videos?api_key=${API_KEY}`);
+  const data = await response.data;
+  return data;
+};
+
+// For TV Show Season Details
+const getTVShowSeason = async (tvId, seasonNumber) => {
+  const response = await axios.get(`${BASE_URL}/tv/${tvId}/season/${seasonNumber}?api_key=${API_KEY}`);
+  const data = await response.data;
+  return data;
+};
+
+export { 
+  getPopularMovies, searchMovies, getMovieDetails, getMovieVideo, getFeaturedMovie, 
+  getTopRatedMovies, getTrendingMovies, getSimilarMovies, getMovieReviews, 
+  getPopularTVShows, getTVShowDetails, getSimilarTVShows, getTVShowReviews, 
+  getTVShowVideo, getTVShowSeason 
+};

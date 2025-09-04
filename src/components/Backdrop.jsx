@@ -1,7 +1,7 @@
 import "../css/MovieDetails.css";
 import { handleDate } from "../services/helper";
 import { useMovieContext } from "../contexts/MovieContext";
-import { getMovieVideo } from "../services/api";
+import { getMovieVideo, getTVShowVideo } from "../services/api";
 import { embedMovie } from "../services/api.v2";
 import { useState } from "react";
 import TrailerModal from "./TrailerModal";
@@ -15,6 +15,15 @@ function Backdrop(props) {
     const [showTrailerModal, setShowTrailerModal] = useState(false);
     const [showFilmModal, setShowFilmModal] = useState(false);
 
+    // Determine if this is a movie or TV show
+    const isMovie = props.contentType === 'movie' || props.movie.hasOwnProperty('title');
+    const isTVShow = props.contentType === 'tv' || props.movie.hasOwnProperty('name');
+    
+    // Get display values dynamically
+    const displayTitle = isMovie ? props.movie.title : props.movie.name;
+    const releaseDate = isMovie ? props.movie.release_date : props.movie.first_air_date;
+    const releaseYear = releaseDate ? releaseDate.split("-")[0] : 'N/A';
+
     const onFavoriteClick = (e) => {
         e.preventDefault();
         if (favorite) {
@@ -27,7 +36,10 @@ function Backdrop(props) {
     const handlePlayTrailer = async (e) => {
         e.preventDefault();
         try {
-            const response = await getMovieVideo(props.movie.id);
+            // Use appropriate API based on content type
+            const response = isMovie ? 
+                await getMovieVideo(props.movie.id) : 
+                await getTVShowVideo(props.movie.id);
             let results = response.results;
             if (results.length > 0) {
                 results = results.filter((video) => video.site === "YouTube" && video.type === "Trailer");
@@ -73,10 +85,10 @@ function Backdrop(props) {
                     <div className="backdrop-content">
                         <div>
                             <h1 className="backdrop-title">
-                                {props.movie.title} ({props.movie?.release_date.split("-")[0]})
+                                {displayTitle} ({releaseYear})
                             </h1>
                             <p>Tagline: &nbsp; "{props.movie.tagline}"</p>
-                            <p>Release Date: {handleDate(props.movie.release_date)}</p>
+                            <p>{isMovie ? 'Release Date' : 'First Air Date'}: {handleDate(releaseDate)}</p>
                         </div>
                         <div className="backdrop-icons justify-center">
                             <div className="watch-btn pointer" onClick={handlePlayFilm}>
