@@ -3,7 +3,9 @@
 /* Base Section Styles */
 .movie-slides-section {
   width: 100%;
-  margin-bottom: 2rem;
+  /* max-width: 1200px; */
+  margin: 0 auto 2rem auto;
+  padding: 0 1rem;
 }
 
 /* Keep original carousel content styles for backward compatibility */
