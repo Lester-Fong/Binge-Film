@@ -241,8 +241,8 @@ function Home() {
             <>
                 <MovieSlidesSection movies={movies} title="Popular Movies" contentType="movie" />
                 <MovieSlidesSection movies={popularTV} title="Popular TV Shows" contentType="tv" />
-                <MovieSlidesSection movies={topRatedMovies} title="Top Rated Movies" contentType="movie" />
                 <MovieSlidesSection movies={trendingMovies} title="Trending Movies" contentType="movie" />
+                <MovieSlidesSection movies={topRatedMovies} title="Top Rated Movies" contentType="movie" />
             </>
         }
         {/* Latest Movies */}
