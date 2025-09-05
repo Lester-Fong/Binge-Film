@@ -3,9 +3,14 @@
 /* Base Section Styles */
 .movie-slides-section {
   width: 100%;
-  /* max-width: 1200px; */
   margin: 0 auto 2rem auto;
   padding: 0 1rem;
+}
+
+/* Carousel Container - Add padding for navigation buttons */
+.movie-slides-section .w-full {
+  padding: 0 3rem; /* Add padding to accommodate nav buttons */
+  position: relative;
 }
 
 /* Keep original carousel content styles for backward compatibility */
@@ -23,11 +28,11 @@
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background: rgba(0, 0, 0, 0.7);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  color: #fbbf24;
-  width: 48px;
-  height: 48px;
+  background: var(--bg-primary);
+  border: 1px solid var(--bg-secondary);
+  color: var(--foreground);
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -55,11 +60,11 @@
 }
 
 .movie-slides-prev {
-  left: 0; /* Changed from -24px to 0 */
+  left: 0.5rem; /* Position inside the padding area */
 }
 
 .movie-slides-next {
-  right: 0; /* Changed from -24px to 0 */
+  right: 0.5rem; /* Position inside the padding area */
 }
 
 /* Responsive Carousel Items per View */
@@ -73,17 +78,16 @@
 
   .movie-slides-title {
     font-size: 2.5rem;
-    padding-left: 1.5rem; /* Consistent with larger padding */
+    padding-left: 1.5rem;
   }
 
   .movie-slides-nav {
-    width: 52px;
-    height: 52px;
+    width: 40px;
+    height: 40px;
   }
 
-  .movie-slides-carousel {
-    margin: 0 1.5rem 0.5rem 1.5rem; /* Increased margin for larger screens */
-    padding: 0 3.5rem;
+  .movie-slides-section .w-full {
+    padding: 0 4rem; /* Increased padding for larger nav buttons */
   }
 }
 
@@ -96,7 +100,11 @@
 
   .movie-slides-title {
     font-size: 2.25rem;
-    padding-left: 1.25rem; /* Keep base padding */
+    padding-left: 1.25rem;
+  }
+
+  .movie-slides-section .w-full {
+    padding: 0 3.5rem;
   }
 }
 
@@ -109,9 +117,15 @@
 
   .movie-slides-title {
     font-size: 2rem;
-    padding-left: 1rem; /* Slightly reduced for medium screens */
+    padding-left: 1rem;
   }
-} /* Tablet (768px to 991px) - 3 items */
+
+  .movie-slides-section .w-full {
+    padding: 0 3rem;
+  }
+}
+
+/* Tablet (768px to 991px) - 3 items */
 @media (max-width: 991px) and (min-width: 768px) {
   .movie-slides-carousel-item {
     width: calc(100% / 3);
@@ -121,17 +135,16 @@
   .movie-slides-title {
     font-size: 1.875rem;
     margin: 1rem 0 1rem 0.25rem;
-    padding-left: 0.75rem; /* Consistent with Reviews section */
+    padding-left: 0.75rem;
   }
 
-  .movie-slides-carousel {
-    margin: 0 1rem 0.5rem 1rem; /* Match Reviews section pattern */
+  .movie-slides-section .w-full {
     padding: 0 2.5rem;
   }
 
   .movie-slides-nav {
-    width: 44px;
-    height: 44px;
+    width: 40px;
+    height: 40px;
   }
 }
 
@@ -142,10 +155,10 @@
     min-width: 0;
   }
 
-  .movie-slides-carousel {
-    margin: 0 0.75rem 0.5rem 0.75rem; /* Reduced margins for mobile */
+  .movie-slides-section .w-full {
     padding: 0 2rem;
   }
+
   .movie-slides-nav {
     width: 40px;
     height: 40px;
@@ -159,8 +172,7 @@
     min-width: 0;
   }
 
-  .movie-slides-carousel {
-    margin: 0 0.5rem 0.5rem 0.5rem; /* Small margins for mobile */
+  .movie-slides-section .w-full {
     padding: 0 1.5rem;
   }
 
@@ -173,53 +185,49 @@
 /* Small Mobile (420px and below) - 1 item only */
 @media (max-width: 420px) {
   .movie-slides-carousel-item {
-    width: 100%; /* Show only one card at a time */
+    width: 100%;
     min-width: 0;
     display: flex;
-    justify-content: center; /* Center the card horizontally */
+    justify-content: center;
   }
 
-  .movie-slides-carousel {
-    margin: 0 0.5rem 0.5rem 0.5rem; /* Reduced margins to give more space for the card */
-    padding: 0 2rem; /* Reduced padding for navigation buttons */
+  .movie-slides-section .w-full {
+    padding: 0 2rem; /* Keep padding for nav buttons */
   }
 
   .movie-slides-nav {
-    width: 36px; /* Slightly smaller to give more space for the card */
+    width: 36px;
     height: 36px;
     font-size: 0.9rem;
   }
 
-  /* Center and resize the single card */
   .movie-slides-carousel-content {
     display: flex;
     align-items: center;
-    justify-content: center; /* Center the carousel content */
+    justify-content: center;
   }
 
-  /* Make the card container larger and centered */
   .movie-slides-card-container {
-    max-width: 280px; /* Limit maximum width for very wide screens */
-    width: 90%; /* Use most of the available width */
+    max-width: 280px;
+    width: 90%;
     display: flex;
     justify-content: center;
   }
 
-  /* Increase padding around the single card for better presentation */
   .movie-slides-card-content {
-    /* padding: 0.5rem; More generous padding for single card view */
     width: 100%;
     display: flex;
     justify-content: center;
   }
-} /* Card Container Adjustments */
+}
+
+/* Card Container Adjustments */
 .movie-slides-card-container {
   height: 100%;
   width: 100%;
 }
 
 .movie-slides-card-content {
-  /* padding: 0.125rem; Reduced from 0.375rem */
   height: 100%;
   display: flex;
   align-items: stretch;
@@ -237,42 +245,6 @@
 @media (max-width: 767px) and (min-width: 421px) {
   .movie-slides-card-content {
     padding: 0.1rem; /* Reduced from 0.25rem */
-  }
-}
-
-@media (max-width: 420px) {
-  .movie-slides-card-content {
-    /* padding: 0.5rem; More generous padding for larger single card */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-}
-
-/* Navigation arrows visibility - Keep visible for single card navigation */
-@media (max-width: 420px) {
-  .movie-slides-nav {
-    display: flex; /* Keep navigation visible for single card swiping */
-    background: rgba(0, 0, 0, 0.8); /* Slightly more opaque for better visibility */
-  }
-
-  .movie-slides-nav:hover {
-    background: rgba(0, 0, 0, 0.95);
-  }
-}
-
-/* Touch scroll indicators for mobile */
-@media (max-width: 480px) {
-  .movie-slides-carousel::after {
-    content: "";
-    position: absolute;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    width: 20px;
-    background: linear-gradient(to left, rgba(0, 0, 0, 0.3), transparent);
-    pointer-events: none;
-    z-index: 5;
   }
 }
 

@@ -1,7 +1,6 @@
 /* TV Show Details Styles */
 .tv-show-details {
-    background-color: var(--background); /* #1e293b */
-    /* color: white; */
+    background-color: var(--background);
     min-height: 100vh;
 }
 
@@ -21,64 +20,85 @@
 
 .tv-show-info-section {
     background-color: var(--background);
-    padding: 2rem 0;
+    padding: 1rem 0;
     display: flex;
     justify-content: center;
 }
 
 .tv-show-content {
-    /* max-width: 1200px; */
     width: 100%;
-    padding: 0 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 .tv-show-main-details {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 1rem;
     width: 100%;
 }
 
+/* Compact Title Section */
+.title-section {
+    margin-bottom: 1rem;
+}
+
 .tv-show-title {
-    font-size: 2.5rem;
+    font-size: 2.2rem;
     font-weight: bold;
     margin-bottom: 0.5rem;
     color: var(--text-primary);
+    line-height: 1.2;
 }
 
 .tv-show-tagline {
     font-style: italic;
-    font-size: 1.1rem;
+    font-size: 1rem;
     color: var(--text-muted);
-    margin-bottom: 1.5rem;
+    margin: 0;
 }
 
-.tv-show-meta {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1rem;
-    margin-bottom: 2rem;
+/* Compact Meta Layout */
+.tv-show-meta-compact {
     background-color: var(--bg-tertiary);
-    padding: 1.5rem;
+    padding: 1rem;
     border-radius: 8px;
+    margin-bottom: 1rem;
 }
 
-.meta-item {
+.meta-row {
     display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin-bottom: 0.75rem;
+}
+
+.meta-row:last-child {
+    margin-bottom: 0;
+}
+
+.meta-group {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-width: 120px;
+}
+
+.meta-group.genres-inline {
+    min-width: 200px;
 }
 
 .meta-label {
     font-weight: 600;
     color: var(--text-subtle);
-    font-size: 0.875rem;
+    font-size: 0.8rem;
     text-transform: uppercase;
     letter-spacing: 0.05em;
+    white-space: nowrap;
 }
 
 .meta-value {
-    font-size: 1rem;
+    font-size: 0.9rem;
     color: white;
     font-weight: 500;
 }
@@ -87,225 +107,273 @@
     color: var(--accent-warning);
 }
 
-.tv-show-genres,
-.tv-show-overview,
-.tv-show-networks,
-.tv-show-creators,
-.last-episode,
-.next-episode {
-    margin-bottom: 2rem;
-}
-
-.tv-show-genres h3,
-.tv-show-overview h3,
-.tv-show-networks h3,
-.tv-show-creators h3,
-.last-episode h3,
-.next-episode h3,
-.seasons-section h3 {
-    font-size: 1.5rem;
-    font-weight: 600;
-    margin-bottom: 1rem;
-    color: var(--text-primary);
-}
-
-.genre-tags {
+.genre-tags-inline {
     display: flex;
-    flex-wrap: wrap;
     gap: 0.5rem;
+    flex-wrap: wrap;
 }
 
-.genre-tag {
+.genre-tag-small {
     background-color: var(--accent-primary);
     color: white;
-    padding: 0.5rem 1rem;
-    border-radius: 20px;
-    font-size: 0.875rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
     font-weight: 500;
 }
 
-.tv-show-overview p {
-    line-height: 1.6;
-    color: var(--text-secondary);
-    font-size: 1rem;
-}
-
-.network-logos {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-    align-items: center;
-}
-
-.network-item {
-    background-color: white;
-    padding: 0.5rem;
-    border-radius: 8px;
-}
-
-.network-logo {
-    height: 40px;
-    object-fit: contain;
-}
-
-.network-name {
-    color: var(--bg-secondary);
-    font-weight: 500;
-    padding: 0.5rem;
-}
-
-.creators-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-}
-
-.creator-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    max-width: 120px;
-}
-
-.creator-photo {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-bottom: 0.5rem;
-}
-
-.creator-name {
-    font-size: 0.875rem;
-    font-weight: 500;
-    color: var(--text-secondary);
-}
-
-.episode-card {
-    background-color: var(--bg-primary);
-    padding: 1.5rem;
-    border-radius: 8px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
-    align-items: start;
-}
-
-.episode-info h4 {
-    font-size: 1.25rem;
-    font-weight: 600;
-    margin-bottom: 0.5rem;
-    color: var(--text-primary);
-}
-
-.episode-date {
-    color: var(--text-muted);
-    font-size: 0.875rem;
-    margin-bottom: 0.75rem;
-}
-
-.episode-overview {
-    color: var(--text-secondary);
-    line-height: 1.5;
-}
-
-.episode-still {
-    width: 200px;
-    border-radius: 8px;
-}
-
-.seasons-section {
-    margin-top: 3rem;
-    padding-top: 2rem;
-    border-top: 1px solid var(--border-primary);
-}
-
-.seasons-grid {
+/* Two Column Content Layout */
+.content-two-column {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-template-columns: 2fr 1fr;
+    gap: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.content-left,
+.content-right {
+    display: flex;
+    flex-direction: column;
     gap: 1.5rem;
 }
 
-.season-card {
-    background-color: var(--bg-tertiary);
+/* Compact Overview */
+.tv-show-overview-compact h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.75rem;
+}
+
+.tv-show-overview-compact p {
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Compact Latest Episode */
+.last-episode-compact h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.75rem;
+}
+
+.episode-card-compact {
+    background-color: var(--bg-secondary);
     border-radius: 8px;
     padding: 1rem;
     display: flex;
     gap: 1rem;
+    border: 1px solid var(--border-primary);
 }
 
-.season-poster {
+.episode-still-small {
     width: 80px;
-    height: 120px;
+    height: 60px;
     object-fit: cover;
     border-radius: 6px;
+    flex-shrink: 0;
 }
 
-.season-info {
+.episode-info-compact {
     flex: 1;
 }
 
-.season-info h4 {
-    font-size: 1.1rem;
+.episode-title {
+    font-size: 1rem;
     font-weight: 600;
-    margin-bottom: 0.5rem;
     color: var(--text-primary);
+    margin-bottom: 0.5rem;
+    line-height: 1.3;
 }
 
-.season-episodes,
-.season-date,
-.season-rating {
+.episode-date {
+    font-size: 0.85rem;
     color: var(--text-muted);
+    margin-bottom: 0.5rem;
+}
+
+.episode-overview-compact {
     font-size: 0.875rem;
-    margin-bottom: 0.25rem;
-}
-
-.season-rating {
-    color: var(--accent-warning);
-}
-
-.season-overview {
     color: var(--text-secondary);
-    font-size: 0.875rem;
     line-height: 1.4;
-    margin-top: 0.5rem;
+    margin: 0;
     display: -webkit-box;
-    -webkit-line-clamp: 3;
-    line-clamp: 3;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
 }
 
+/* Compact Networks */
+.tv-show-networks-compact h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.75rem;
+}
+
+.network-logos-compact {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.network-item-compact {
+    display: flex;
+    align-items: center;
+    background-color: var(--bg-secondary);
+    padding: 0.5rem;
+    border-radius: 6px;
+    border: 1px solid var(--border-primary);
+}
+
+.network-logo-small {
+    max-width: 60px;
+    max-height: 30px;
+    object-fit: contain;
+}
+
+.network-name-small {
+    font-size: 0.875rem;
+    color: var(--text-primary);
+    font-weight: 500;
+}
+
+/* Compact Creators */
+.tv-show-creators-compact h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.75rem;
+}
+
+.creators-list-compact {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.creator-item-compact {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    background-color: var(--bg-secondary);
+    padding: 0.5rem;
+    border-radius: 6px;
+    border: 1px solid var(--border-primary);
+}
+
+.creator-photo-small {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.creator-name-small {
+    font-size: 0.875rem;
+    color: var(--text-primary);
+    font-weight: 500;
+}
+
 /* Responsive Design */
 @media (max-width: 1024px) {
-    .tv-show-title {
-        font-size: 2rem;
+    .content-two-column {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
     }
     
-    .episode-still {
-        width: 100%;
-        max-width: 300px;
-        justify-self: center;
+    .tv-show-title {
+        font-size: 2rem;
     }
 }
 
 @media (max-width: 768px) {
-    .tv-show-meta {
-        grid-template-columns: 1fr;
+    .tv-show-content {
+        padding: 0 1rem;
     }
     
-    .season-card {
+    .tv-show-title {
+        font-size: 1.8rem;
+    }
+    
+    .meta-row {
         flex-direction: column;
-        text-align: center;
+        gap: 1rem;
     }
     
-    .season-poster {
-        width: 120px;
-        height: 180px;
+    .meta-group {
+        min-width: auto;
+        justify-content: space-between;
+        padding: 0.5rem 0;
+        border-bottom: 1px solid var(--border-primary);
+    }
+    
+    .meta-group:last-child {
+        border-bottom: none;
+    }
+    
+    .meta-group.genres-inline {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+        min-width: auto;
+    }
+    
+    .episode-card-compact {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+    
+    .episode-still-small {
+        width: 100%;
+        height: 120px;
         align-self: center;
+        max-width: 200px;
+    }
+    
+    .network-logos-compact,
+    .creators-list-compact {
+        gap: 0.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .tv-show-info-section {
+        padding: 0.5rem 0;
+    }
+    
+    .tv-show-title {
+        font-size: 1.5rem;
+    }
+    
+    .tv-show-tagline {
+        font-size: 0.9rem;
+    }
+    
+    .tv-show-meta-compact {
+        padding: 0.75rem;
+    }
+    
+    .content-left,
+    .content-right {
+        gap: 1rem;
+    }
+    
+    .episode-card-compact {
+        padding: 0.75rem;
+    }
+    
+    .episode-title {
+        font-size: 0.9rem;
+    }
+    
+    .episode-overview-compact {
+        font-size: 0.8rem;
+        -webkit-line-clamp: 3;
+        line-clamp: 3;
     }
 }
 

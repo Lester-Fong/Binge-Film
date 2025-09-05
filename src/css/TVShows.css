@@ -1,0 +1,338 @@
+/* TV Shows Page Styles */
+.tv-shows-container {
+    min-height: 100vh;
+    background-color: var(--background);
+    padding-top: 7.75rem;
+    width: 100%;
+    /* max-width: 1200px; */
+    /* margin: 0 auto; */
+}
+
+.tv-shows-header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+    padding: 0 2rem;
+}
+
+.tv-shows-header h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+    background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.tv-shows-header p {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Category Filter */
+.category-filter {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+    padding: 0 2rem;
+    flex-wrap: wrap;
+}
+
+.category-btn {
+    background-color: var(--bg-secondary);
+    color: var(--text-secondary);
+    border: 1px solid var(--border-primary);
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 0.9rem;
+}
+
+.category-btn:hover {
+    background-color: var(--bg-tertiary);
+    color: var(--text-primary);
+    transform: translateY(-1px);
+}
+
+.category-btn.active {
+    background-color: var(--accent-primary);
+    color: white;
+    border-color: var(--accent-primary);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+/* Results Info */
+.results-info {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    padding: 0 2rem;
+}
+
+.page-info {
+    opacity: 0.8;
+}
+
+/* TV Shows Grid */
+.tv-shows-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1.5rem;
+    padding: 0 2rem;
+    margin-bottom: 3rem;
+}
+
+.tv-show-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    transition: transform 0.2s ease;
+}
+
+.tv-show-link:hover {
+    transform: translateY(-4px);
+}
+
+/* Loading States */
+.loading-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 50vh;
+    color: var(--text-secondary);
+}
+
+.loading-spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid var(--bg-tertiary);
+    border-top: 3px solid var(--accent-primary);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 1rem;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Error States */
+.error-container {
+    text-align: center;
+    padding: 3rem 2rem;
+    color: var(--text-secondary);
+    min-height: 50vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.error-container h2 {
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+    font-size: 1.75rem;
+}
+
+.retry-btn {
+    background-color: var(--accent-primary);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 500;
+    cursor: pointer;
+    margin-top: 1rem;
+    transition: all 0.2s ease;
+}
+
+.retry-btn:hover {
+    background-color: var(--accent-secondary);
+    transform: translateY(-1px);
+}
+
+/* No Results */
+.no-results {
+    text-align: center;
+    padding: 3rem 2rem;
+    color: var(--text-secondary);
+}
+
+.no-results h3 {
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+    font-size: 1.5rem;
+}
+
+/* Pagination */
+.pagination-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    padding: 0 2rem;
+    margin-top: 3rem;
+}
+
+.pagination {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.pagination-btn {
+    background-color: var(--bg-secondary);
+    color: var(--text-secondary);
+    border: 1px solid var(--border-primary);
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 0.9rem;
+    min-width: 100px;
+}
+
+.pagination-btn:hover:not(.disabled) {
+    background-color: var(--bg-tertiary);
+    color: var(--text-primary);
+    transform: translateY(-1px);
+}
+
+.pagination-btn.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.page-numbers {
+    display: flex;
+    gap: 0.25rem;
+    align-items: center;
+}
+
+.page-btn {
+    background-color: var(--bg-secondary);
+    color: var(--text-secondary);
+    border: 1px solid var(--border-primary);
+    padding: 0.5rem 0.75rem;
+    border-radius: 6px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 0.85rem;
+    min-width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.page-btn:hover:not(.disabled):not(.dots) {
+    background-color: var(--bg-tertiary);
+    color: var(--text-primary);
+}
+
+.page-btn.active {
+    background-color: var(--accent-primary);
+    color: white;
+    border-color: var(--accent-primary);
+}
+
+.page-btn.dots {
+    cursor: default;
+    border: none;
+    background: transparent;
+    color: var(--text-muted);
+}
+
+.pagination-info {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .tv-shows-grid {
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+        gap: 1.25rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .tv-shows-container {
+        padding: 1.5rem 0;
+    }
+    
+    .tv-shows-header h1 {
+        font-size: 2rem;
+    }
+    
+    .tv-shows-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 1rem;
+        padding: 0 1rem;
+    }
+    
+    .category-filter,
+    .results-info,
+    .pagination-container {
+        padding: 0 1rem;
+    }
+    
+    .pagination {
+        flex-wrap: wrap;
+        gap: 0.25rem;
+    }
+    
+    .pagination-btn {
+        min-width: 80px;
+        padding: 0.5rem 0.75rem;
+        font-size: 0.85rem;
+    }
+    
+    .page-btn {
+        min-width: 32px;
+        height: 32px;
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .tv-shows-header {
+        padding: 0 1rem;
+    }
+    
+    .tv-shows-header h1 {
+        font-size: 1.75rem;
+    }
+    
+    .tv-shows-grid {
+        grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    }
+    
+    .category-filter {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .category-btn {
+        width: 100%;
+        max-width: 200px;
+    }
+    
+    .page-numbers {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+}
