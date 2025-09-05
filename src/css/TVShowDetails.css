@@ -1,7 +1,7 @@
 /* TV Show Details Styles */
 .tv-show-details {
-    background-color: #0f172a;
-    color: white;
+    background-color: var(--background); /* #1e293b */
+    /* color: white; */
     min-height: 100vh;
 }
 
@@ -10,7 +10,7 @@
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #0f172a;
+    background-color: var(--background);
 }
 
 .loading-text {
@@ -20,39 +20,36 @@
 }
 
 .tv-show-info-section {
-    background-color: #1e293b;
+    background-color: var(--background);
     padding: 2rem 0;
-}
-
-.tv-show-poster-section {
     display: flex;
     justify-content: center;
 }
 
-.tv-show-poster {
+.tv-show-content {
+    /* max-width: 1200px; */
     width: 100%;
-    max-width: 400px;
-    border-radius: 12px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    padding: 0 2rem;
 }
 
 .tv-show-main-details {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
+    width: 100%;
 }
 
 .tv-show-title {
     font-size: 2.5rem;
     font-weight: bold;
     margin-bottom: 0.5rem;
-    color: #f1f5f9;
+    color: var(--text-primary);
 }
 
 .tv-show-tagline {
     font-style: italic;
     font-size: 1.1rem;
-    color: #94a3b8;
+    color: var(--text-muted);
     margin-bottom: 1.5rem;
 }
 
@@ -61,7 +58,7 @@
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 1rem;
     margin-bottom: 2rem;
-    background-color: #334155;
+    background-color: var(--bg-tertiary);
     padding: 1.5rem;
     border-radius: 8px;
 }
@@ -74,7 +71,7 @@
 
 .meta-label {
     font-weight: 600;
-    color: #cbd5e1;
+    color: var(--text-subtle);
     font-size: 0.875rem;
     text-transform: uppercase;
     letter-spacing: 0.05em;
@@ -87,7 +84,7 @@
 }
 
 .meta-value.rating {
-    color: #fbbf24;
+    color: var(--accent-warning);
 }
 
 .tv-show-genres,
@@ -109,7 +106,7 @@
     font-size: 1.5rem;
     font-weight: 600;
     margin-bottom: 1rem;
-    color: #f1f5f9;
+    color: var(--text-primary);
 }
 
 .genre-tags {
@@ -119,7 +116,7 @@
 }
 
 .genre-tag {
-    background-color: #3b82f6;
+    background-color: var(--accent-primary);
     color: white;
     padding: 0.5rem 1rem;
     border-radius: 20px;
@@ -129,7 +126,7 @@
 
 .tv-show-overview p {
     line-height: 1.6;
-    color: #e2e8f0;
+    color: var(--text-secondary);
     font-size: 1rem;
 }
 
@@ -152,7 +149,7 @@
 }
 
 .network-name {
-    color: #1e293b;
+    color: var(--bg-secondary);
     font-weight: 500;
     padding: 0.5rem;
 }
@@ -182,15 +179,17 @@
 .creator-name {
     font-size: 0.875rem;
     font-weight: 500;
-    color: #e2e8f0;
+    color: var(--text-secondary);
 }
 
 .episode-card {
-    background-color: #334155;
+    background-color: var(--bg-primary);
     padding: 1.5rem;
     border-radius: 8px;
-    display: grid;
-    grid-template-columns: 1fr auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     gap: 1rem;
     align-items: start;
 }
@@ -199,17 +198,17 @@
     font-size: 1.25rem;
     font-weight: 600;
     margin-bottom: 0.5rem;
-    color: #f1f5f9;
+    color: var(--text-primary);
 }
 
 .episode-date {
-    color: #94a3b8;
+    color: var(--text-muted);
     font-size: 0.875rem;
     margin-bottom: 0.75rem;
 }
 
 .episode-overview {
-    color: #e2e8f0;
+    color: var(--text-secondary);
     line-height: 1.5;
 }
 
@@ -221,7 +220,7 @@
 .seasons-section {
     margin-top: 3rem;
     padding-top: 2rem;
-    border-top: 1px solid #475569;
+    border-top: 1px solid var(--border-primary);
 }
 
 .seasons-grid {
@@ -231,7 +230,7 @@
 }
 
 .season-card {
-    background-color: #334155;
+    background-color: var(--bg-tertiary);
     border-radius: 8px;
     padding: 1rem;
     display: flex;
@@ -253,23 +252,23 @@
     font-size: 1.1rem;
     font-weight: 600;
     margin-bottom: 0.5rem;
-    color: #f1f5f9;
+    color: var(--text-primary);
 }
 
 .season-episodes,
 .season-date,
 .season-rating {
-    color: #94a3b8;
+    color: var(--text-muted);
     font-size: 0.875rem;
     margin-bottom: 0.25rem;
 }
 
 .season-rating {
-    color: #fbbf24;
+    color: var(--accent-warning);
 }
 
 .season-overview {
-    color: #e2e8f0;
+    color: var(--text-secondary);
     font-size: 0.875rem;
     line-height: 1.4;
     margin-top: 0.5rem;
@@ -284,10 +283,6 @@
 @media (max-width: 1024px) {
     .tv-show-title {
         font-size: 2rem;
-    }
-    
-    .episode-card {
-        grid-template-columns: 1fr;
     }
     
     .episode-still {
@@ -316,7 +311,7 @@
 
 /* Error message styling */
 .error-message {
-    background-color: #ef4444;
+    background-color: var(--accent-danger);
     color: white;
     padding: 1rem;
     border-radius: 8px;
