@@ -106,7 +106,7 @@ function Home() {
                 { 
                     name: 'tv', 
                     promise: getPopularTVShows(),
-                    setter: setPopularTV 
+                    setter: (data) => setPopularTV(data.results || [])
                 }
             ];
 
