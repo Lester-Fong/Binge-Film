@@ -82,10 +82,24 @@ const getMovieReviews = async (movieId) => {
 
 
 // ============== TV SHOWS =============>
-const getPopularTVShows = async () => {
-  const response = await axios.get(`${BASE_URL}/tv/popular?api_key=${API_KEY}`);
+const getPopularTVShows = async (page = 1) => {
+  const response = await axios.get(`${BASE_URL}/tv/popular?api_key=${API_KEY}&page=${page}`);
   const data = await response.data;
-  return data.results;
+  return data;
+};
+
+// For Top Rated TV Shows with pagination
+const getTopRatedTVShows = async (page = 1) => {
+  const response = await axios.get(`${BASE_URL}/tv/top_rated?api_key=${API_KEY}&page=${page}`);
+  const data = await response.data;
+  return data;
+};
+
+// For On Air TV Shows with pagination
+const getOnAirTVShows = async (page = 1) => {
+  const response = await axios.get(`${BASE_URL}/tv/on_the_air?api_key=${API_KEY}&page=${page}`);
+  const data = await response.data;
+  return data;
 };
 
 // For TV Show Details
@@ -126,6 +140,6 @@ const getTVShowSeason = async (tvId, seasonNumber) => {
 export { 
   getPopularMovies, searchMovies, searchTVShows, searchMulti, getMovieDetails, getMovieVideo, getFeaturedMovie, 
   getTopRatedMovies, getTrendingMovies, getSimilarMovies, getMovieReviews, 
-  getPopularTVShows, getTVShowDetails, getSimilarTVShows, getTVShowReviews, 
+  getPopularTVShows, getTopRatedTVShows, getOnAirTVShows, getTVShowDetails, getSimilarTVShows, getTVShowReviews, 
   getTVShowVideo, getTVShowSeason 
 };
