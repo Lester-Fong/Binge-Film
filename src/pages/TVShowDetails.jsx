@@ -73,150 +73,164 @@ function TVShowDetails() {
 
             {/* TV Show Specific Information */}
             <div className="tv-show-info-section">
-                <div className="container mx-auto px-4 py-8">
+                <div className="container mx-auto px-4 py-6">
                     <div className="tv-show-content">
-                        {/* Main Details - Full Width */}
+                        {/* Compact Main Details */}
                         <div className="tv-show-main-details">
-                            <h1 className="tv-show-title">{tvShowDetails.name}</h1>
-                            
-                            {tvShowDetails.tagline && (
-                                <p className="tv-show-tagline">"{tvShowDetails.tagline}"</p>
-                            )}
-
-                            <div className="tv-show-meta">
-                                <div className="meta-item">
-                                    <span className="meta-label">Status:</span>
-                                    <span className="meta-value">{tvShowDetails.status}</span>
-                                </div>
+                            <div className="title-section">
+                                <h1 className="tv-show-title">{tvShowDetails.name}</h1>
                                 
-                                <div className="meta-item">
-                                    <span className="meta-label">First Air Date:</span>
-                                    <span className="meta-value">
-                                        {new Date(tvShowDetails.first_air_date).toLocaleDateString()}
-                                    </span>
-                                </div>
+                                {tvShowDetails.tagline && (
+                                    <p className="tv-show-tagline">"{tvShowDetails.tagline}"</p>
+                                )}
+                            </div>
 
-                                {tvShowDetails.last_air_date && (
-                                    <div className="meta-item">
-                                        <span className="meta-label">Last Air Date:</span>
-                                        <span className="meta-value">
-                                            {new Date(tvShowDetails.last_air_date).toLocaleDateString()}
+                            {/* Compact Meta Grid */}
+                            <div className="tv-show-meta-compact">
+                                <div className="meta-row">
+                                    <div className="meta-group">
+                                        <span className="meta-label">Status:</span>
+                                        <span className="meta-value">{tvShowDetails.status}</span>
+                                    </div>
+                                    
+                                    <div className="meta-group">
+                                        <span className="meta-label">Seasons:</span>
+                                        <span className="meta-value">{tvShowDetails.number_of_seasons}</span>
+                                    </div>
+
+                                    <div className="meta-group">
+                                        <span className="meta-label">Episodes:</span>
+                                        <span className="meta-value">{tvShowDetails.number_of_episodes}</span>
+                                    </div>
+
+                                    <div className="meta-group">
+                                        <span className="meta-label">Rating:</span>
+                                        <span className="meta-value rating">
+                                            ⭐ {tvShowDetails.vote_average?.toFixed(1)}/10
                                         </span>
                                     </div>
-                                )}
-
-                                <div className="meta-item">
-                                    <span className="meta-label">Seasons:</span>
-                                    <span className="meta-value">{tvShowDetails.number_of_seasons}</span>
                                 </div>
 
-                                <div className="meta-item">
-                                    <span className="meta-label">Episodes:</span>
-                                    <span className="meta-value">{tvShowDetails.number_of_episodes}</span>
-                                </div>
+                                <div className="meta-row">
+                                    <div className="meta-group">
+                                        <span className="meta-label">First Air:</span>
+                                        <span className="meta-value">
+                                            {new Date(tvShowDetails.first_air_date).toLocaleDateString()}
+                                        </span>
+                                    </div>
 
-                                <div className="meta-item">
-                                    <span className="meta-label">Rating:</span>
-                                    <span className="meta-value rating">
-                                        ⭐ {tvShowDetails.vote_average?.toFixed(1)}/10 
-                                        ({tvShowDetails.vote_count} votes)
-                                    </span>
+                                    {tvShowDetails.last_air_date && (
+                                        <div className="meta-group">
+                                            <span className="meta-label">Last Air:</span>
+                                            <span className="meta-value">
+                                                {new Date(tvShowDetails.last_air_date).toLocaleDateString()}
+                                            </span>
+                                        </div>
+                                    )}
+
+                                    {/* Genres inline */}
+                                    {tvShowDetails.genres && tvShowDetails.genres.length > 0 && (
+                                        <div className="meta-group genres-inline">
+                                            <span className="meta-label">Genres:</span>
+                                            <div className="genre-tags-inline">
+                                                {tvShowDetails.genres.slice(0, 3).map(genre => (
+                                                    <span key={genre.id} className="genre-tag-small">{genre.name}</span>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    )}
                                 </div>
                             </div>
 
-                            {/* Genres */}
-                            {tvShowDetails.genres && tvShowDetails.genres.length > 0 && (
-                                <div className="tv-show-genres">
-                                    <h3>Genres</h3>
-                                    <div className="genre-tags">
-                                        {tvShowDetails.genres.map(genre => (
-                                            <span key={genre.id} className="genre-tag">{genre.name}</span>
-                                        ))}
-                                    </div>
-                                </div>
-                            )}
-
-                            {/* Overview */}
-                            {tvShowDetails.overview && (
-                                <div className="tv-show-overview">
-                                    <h3>Overview</h3>
-                                    <p>{tvShowDetails.overview}</p>
-                                </div>
-                            )}
-
-                            {/* Networks */}
-                            {tvShowDetails.networks && tvShowDetails.networks.length > 0 && (
-                                <div className="tv-show-networks">
-                                    <h3>Networks</h3>
-                                    <div className="network-logos">
-                                        {tvShowDetails.networks.map(network => (
-                                            <div key={network.id} className="network-item">
-                                                {network.logo_path ? (
-                                                    <img 
-                                                        src={`https://image.tmdb.org/t/p/w200${network.logo_path}`}
-                                                        alt={network.name}
-                                                        className="network-logo"
-                                                    />
-                                                ) : (
-                                                    <span className="network-name">{network.name}</span>
-                                                )}
-                                            </div>
-                                        ))}
-                                    </div>
-                                </div>
-                            )}
-
-                            {/* Created By */}
-                            {tvShowDetails.created_by && tvShowDetails.created_by.length > 0 && (
-                                <div className="tv-show-creators">
-                                    <h3>Created By</h3>
-                                    <div className="creators-list">
-                                        {tvShowDetails.created_by.map(creator => (
-                                            <div key={creator.id} className="creator-item">
-                                                {creator.profile_path && (
-                                                    <img 
-                                                        src={`https://image.tmdb.org/t/p/w185${creator.profile_path}`}
-                                                        alt={creator.name}
-                                                        className="creator-photo"
-                                                    />
-                                                )}
-                                                <span className="creator-name">{creator.name}</span>
-                                            </div>
-                                        ))}
-                                    </div>
-                                </div>
-                            )}
-
-                            {/* Last Episode */}
-                            {tvShowDetails.last_episode_to_air && (
-                                <div className="last-episode">
-                                    <h3>Latest Episode</h3>
-                                    <div className="episode-card">
-                                        <div className="episode-info">
-                                            <h4>
-                                                S{tvShowDetails.last_episode_to_air.season_number}E{tvShowDetails.last_episode_to_air.episode_number}: {tvShowDetails.last_episode_to_air.name}
-                                            </h4>
-                                            <p className="episode-date">
-                                                Aired: {new Date(tvShowDetails.last_episode_to_air.air_date).toLocaleDateString()}
-                                            </p>
-                                            {tvShowDetails.last_episode_to_air.overview && (
-                                                <p className="episode-overview">{tvShowDetails.last_episode_to_air.overview}</p>
-                                            )}
+                            {/* Two Column Layout for Content */}
+                            <div className="content-two-column">
+                                {/* Left Column - Overview and Latest Episode */}
+                                <div className="content-left">
+                                    {/* Overview */}
+                                    {tvShowDetails.overview && (
+                                        <div className="tv-show-overview-compact">
+                                            <h3>Overview</h3>
+                                            <p>{tvShowDetails.overview}</p>
                                         </div>
-                                        {tvShowDetails.last_episode_to_air.still_path && (
-                                            <img 
-                                                src={`https://image.tmdb.org/t/p/w300${tvShowDetails.last_episode_to_air.still_path}`}
-                                                alt={tvShowDetails.last_episode_to_air.name}
-                                                className="episode-still"
-                                            />
-                                        )}
-                                    </div>
+                                    )}
+
+                                    {/* Last Episode - Compact Card */}
+                                    {tvShowDetails.last_episode_to_air && (
+                                        <div className="last-episode-compact">
+                                            <h3>Latest Episode</h3>
+                                            <div className="episode-card-compact">
+                                                {tvShowDetails.last_episode_to_air.still_path && (
+                                                    <img 
+                                                        src={`https://image.tmdb.org/t/p/w200${tvShowDetails.last_episode_to_air.still_path}`}
+                                                        alt={tvShowDetails.last_episode_to_air.name}
+                                                        className="episode-still-small"
+                                                    />
+                                                )}
+                                                <div className="episode-info-compact">
+                                                    <h4 className="episode-title">
+                                                        S{tvShowDetails.last_episode_to_air.season_number}E{tvShowDetails.last_episode_to_air.episode_number}: {tvShowDetails.last_episode_to_air.name}
+                                                    </h4>
+                                                    <p className="episode-date">
+                                                        Aired: {new Date(tvShowDetails.last_episode_to_air.air_date).toLocaleDateString()}
+                                                    </p>
+                                                    {tvShowDetails.last_episode_to_air.overview && (
+                                                        <p className="episode-overview-compact">{tvShowDetails.last_episode_to_air.overview}</p>
+                                                    )}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    )}
                                 </div>
-                            )}
+
+                                {/* Right Column - Networks and Creators */}
+                                <div className="content-right">
+                                    {/* Networks - Compact */}
+                                    {tvShowDetails.networks && tvShowDetails.networks.length > 0 && (
+                                        <div className="tv-show-networks-compact">
+                                            <h3>Networks</h3>
+                                            <div className="network-logos-compact">
+                                                {tvShowDetails.networks.slice(0, 3).map(network => (
+                                                    <div key={network.id} className="network-item-compact">
+                                                        {network.logo_path ? (
+                                                            <img 
+                                                                src={`https://image.tmdb.org/t/p/w92${network.logo_path}`}
+                                                                alt={network.name}
+                                                                className="network-logo-small"
+                                                            />
+                                                        ) : (
+                                                            <span className="network-name-small">{network.name}</span>
+                                                        )}
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    )}
+
+                                    {/* Created By - Compact */}
+                                    {tvShowDetails.created_by && tvShowDetails.created_by.length > 0 && (
+                                        <div className="tv-show-creators-compact">
+                                            <h3>Created By</h3>
+                                            <div className="creators-list-compact">
+                                                {tvShowDetails.created_by.slice(0, 3).map(creator => (
+                                                    <div key={creator.id} className="creator-item-compact">
+                                                        {creator.profile_path && (
+                                                            <img 
+                                                                src={`https://image.tmdb.org/t/p/w92${creator.profile_path}`}
+                                                                alt={creator.name}
+                                                                className="creator-photo-small"
+                                                            />
+                                                        )}
+                                                        <span className="creator-name-small">{creator.name}</span>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    )}
+                                </div>
+                            </div>
 
                         </div>
                     </div>
-
 
                     {/* Episodes List Section */}
                     <EpisodeList 
