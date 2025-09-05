@@ -4,6 +4,7 @@ import { getTVShowDetails, getSimilarTVShows, getTVShowReviews } from "../servic
 import Backdrop from "../components/Backdrop";
 import ReviewsSection from "../components/ReviewsSection";
 import MovieSlidesSection from "../components/MovieSlidesSection";
+import EpisodeList from "../components/EpisodeList";
 import '../css/TVShowDetails.css';
 
 function TVShowDetails() {
@@ -73,19 +74,9 @@ function TVShowDetails() {
             {/* TV Show Specific Information */}
             <div className="tv-show-info-section">
                 <div className="container mx-auto px-4 py-8">
-                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                        
-                        {/* Left Column - Poster and Basic Info */}
-                        <div className="tv-show-poster-section">
-                            <img 
-                                src={`https://image.tmdb.org/t/p/w500${tvShowDetails.poster_path}`} 
-                                alt={tvShowDetails.name}
-                                className="tv-show-poster"
-                            />
-                        </div>
-
-                        {/* Middle Column - Main Details */}
-                        <div className="tv-show-main-details col-span-2">
+                    <div className="tv-show-content">
+                        {/* Main Details - Full Width */}
+                        <div className="tv-show-main-details">
                             <h1 className="tv-show-title">{tvShowDetails.name}</h1>
                             
                             {tvShowDetails.tagline && (
@@ -223,64 +214,16 @@ function TVShowDetails() {
                                 </div>
                             )}
 
-                            {/* Next Episode */}
-                            {tvShowDetails.next_episode_to_air && (
-                                <div className="next-episode">
-                                    <h3>Next Episode</h3>
-                                    <div className="episode-card">
-                                        <div className="episode-info">
-                                            <h4>
-                                                S{tvShowDetails.next_episode_to_air.season_number}E{tvShowDetails.next_episode_to_air.episode_number}: {tvShowDetails.next_episode_to_air.name}
-                                            </h4>
-                                            <p className="episode-date">
-                                                Airs: {new Date(tvShowDetails.next_episode_to_air.air_date).toLocaleDateString()}
-                                            </p>
-                                            {tvShowDetails.next_episode_to_air.overview && (
-                                                <p className="episode-overview">{tvShowDetails.next_episode_to_air.overview}</p>
-                                            )}
-                                        </div>
-                                    </div>
-                                </div>
-                            )}
                         </div>
                     </div>
 
-                    {/* Seasons Section */}
-                    {tvShowDetails.seasons && tvShowDetails.seasons.length > 0 && (
-                        <div className="seasons-section">
-                            <h3>Seasons</h3>
-                            <div className="seasons-grid">
-                                {tvShowDetails.seasons.map(season => (
-                                    <div key={season.id} className="season-card">
-                                        {season.poster_path && (
-                                            <img 
-                                                src={`https://image.tmdb.org/t/p/w300${season.poster_path}`}
-                                                alt={season.name}
-                                                className="season-poster"
-                                            />
-                                        )}
-                                        <div className="season-info">
-                                            <h4>{season.name}</h4>
-                                            <p className="season-episodes">{season.episode_count} episodes</p>
-                                            {season.air_date && (
-                                                <p className="season-date">
-                                                    Aired: {new Date(season.air_date).getFullYear()}
-                                                </p>
-                                            )}
-                                            {season.vote_average > 0 && (
-                                                <p className="season-rating">
-                                                    ⭐ {season.vote_average.toFixed(1)}
-                                                </p>
-                                            )}
-                                            {season.overview && (
-                                                <p className="season-overview">{season.overview}</p>
-                                            )}
-                                        </div>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
-                    )}
+
+                    {/* Episodes List Section */}
+                    <EpisodeList 
+                        tvShowId={tvShowDetails.id}
+                        seasons={tvShowDetails.seasons}
+                        showName={tvShowDetails.name}
+                    />
                 </div>
             </div>
 
