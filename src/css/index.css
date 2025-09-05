@@ -18,6 +18,27 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  
+  /* Theme Color Variables */
+  --bg-primary: #0f172a;        /* Main dark background */
+  --bg-secondary: #1e293b;      /* Secondary background (main theme color) */
+  --bg-tertiary: #334155;       /* Cards and components */
+  --bg-quaternary: #475569;     /* Buttons and inputs */
+  
+  --text-primary: #f1f5f9;      /* Primary text (white) */
+  --text-secondary: #e2e8f0;    /* Secondary text */
+  --text-muted: #94a3b8;        /* Muted/gray text */
+  --text-subtle: #cbd5e1;       /* Very subtle text */
+  
+  --accent-primary: #3b82f6;    /* Primary blue accent */
+  --accent-secondary: #64748b;  /* Secondary accent */
+  --accent-warning: #fbbf24;    /* Warning/rating color */
+  --accent-danger: #ef4444;     /* Error/danger color */
+  
+  --border-primary: #475569;    /* Primary borders */
+  --border-secondary: #64748b;  /* Secondary borders */
+  
+  /* Existing Tailwind CSS variables */
   --radius: 0.625rem;
   --background: oklch(13.641% 0.05548 295.538 / 0.874);
   --foreground: oklch(88.64% 0.03669 48.182);
@@ -68,6 +89,7 @@ body {
   width: 100%;
   min-height: 100vh;
   position: relative;
+  background-color: var(--background);
 }
 
 #root {
