@@ -25,7 +25,7 @@ const MovieSlidesSection = ({ title, movies, contentType }) => {
                             {movies.map((movie) => {
                                 // Determine if this item is a TV show or movie
                                 const isTV = contentType === 'tv' || movie.hasOwnProperty('name');
-                                const routePath = isTV ? `/tv/${movie.id}` : `/movie/${movie.id}`;
+                                const routePath = isTV ? `/tvshow/${movie.id}` : `/movie/${movie.id}`;
                                 
                                 return (
                                 <CarouselItem
