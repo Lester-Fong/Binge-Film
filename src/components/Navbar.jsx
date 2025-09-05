@@ -26,7 +26,7 @@ function Navbar() {
                 {/* Desktop Navigation Links */}
                 <div className={`navbar-links ${isMobileMenuOpen ? 'navbar-links-mobile-open' : ''}`}>
                     <Link to="/" className="nav-link" onClick={closeMobileMenu}>Home</Link>
-                    <Link to="/favorites" className="nav-link" onClick={closeMobileMenu}>TV Shows</Link>
+                    <Link to="/tvshows" className="nav-link" onClick={closeMobileMenu}>TV Shows</Link>
                     <Link to="/favorites" className="nav-link" onClick={closeMobileMenu}>Favorites</Link>
 
                     {/* Mobile Search Button */}
