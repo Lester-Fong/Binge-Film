@@ -1,0 +1,217 @@
+/* Episode List Component Styles */
+.episode-list-container {
+    margin-top: 2rem;
+    background-color: transparent;
+    padding: 0;
+}
+
+.episode-list-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.episode-list-header h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.season-selector {
+    position: relative;
+}
+
+.season-dropdown {
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+    border: 1px solid var(--border-primary);
+    padding: 0.75rem 2rem 0.75rem 1rem;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+    background-position: right 0.5rem center;
+    background-repeat: no-repeat;
+    background-size: 1.5em 1.5em;
+    min-width: 150px;
+}
+
+.season-dropdown:hover {
+    background-color: var(--bg-tertiary);
+    border-color: var(--accent-secondary);
+}
+
+.season-dropdown:focus {
+    outline: none;
+    border-color: var(--accent-primary);
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+}
+
+.episodes-loading,
+.episodes-error,
+.no-episodes {
+    text-align: center;
+    padding: 2rem;
+    color: var(--text-muted);
+}
+
+.episodes-error {
+    color: var(--accent-danger);
+    background-color: rgba(239, 68, 68, 0.1);
+    border-radius: 8px;
+}
+
+.episodes-container {
+    margin-top: 1rem;
+}
+
+.episodes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1rem;
+}
+
+.episode-card {
+    background-color: var(--bg-primary);
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    transition: all 0.2s ease;
+    border: 1px solid transparent;
+    cursor: pointer;
+}
+
+.episode-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    border-color: var(--border-primary);
+}
+
+.episode-image {
+    position: relative;
+    /* width: 160px;
+    height: 90px; */
+    flex-shrink: 0;
+}
+
+.episode-thumbnail {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.episode-placeholder {
+    width: 100%;
+    height: 100%;
+    background-color: var(--bg-quaternary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted);
+    font-size: 0.75rem;
+}
+
+.episode-duration {
+    position: absolute;
+    bottom: 0.5rem;
+    right: 0.5rem;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+.episode-details {
+    flex: 1;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.episode-number {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    line-height: 1.3;
+    margin-bottom: 0.5rem;
+}
+
+.episode-overview {
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+    line-height: 1.4;
+    margin: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .episode-list-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+    
+    .episodes-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .episode-card {
+        flex-direction: column;
+    }
+    
+    .episode-image {
+        width: 100%;
+        /* height: 200px; */
+    }
+    
+    .episode-details {
+        padding: 1rem;
+    }
+    
+    .episode-number {
+        font-size: 0.875rem;
+    }
+    
+    .episode-overview {
+        -webkit-line-clamp: 4;
+        line-clamp: 4;
+    }
+}
+
+@media (max-width: 480px) {
+    .episode-list-container {
+        margin-top: 1rem;
+    }
+    
+    .episode-list-header h3 {
+        font-size: 1.25rem;
+    }
+    
+    .season-dropdown {
+        width: 100%;
+        min-width: auto;
+    }
+    
+    .episodes-grid {
+        gap: 0.75rem;
+    }
+    
+    .episode-image {
+        height: 180px;
+    }
+    
+    .episode-details {
+        padding: 0.875rem;
+    }
+}
