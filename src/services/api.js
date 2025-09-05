@@ -31,12 +31,25 @@ const searchMovies = async (query) => {
   return data.results;
 };
 
-// For Movie Details
-const getMovieDetails = async (movieId, type) => {
-  const response = await axios.get(`${BASE_URL}/${type}/${movieId}?api_key=${API_KEY}`);
+// For Searching of TV Shows
+const searchTVShows = async (query) => {
+  const response = await axios.get(`${BASE_URL}/search/tv?api_key=${API_KEY}&query=${encodeURIComponent(query)}`);
   const data = await response.data;
-  console.log(data);
-  
+  return data.results;
+};
+
+// For Searching both Movies and TV Shows
+const searchMulti = async (query) => {
+  const response = await axios.get(`${BASE_URL}/search/multi?api_key=${API_KEY}&query=${encodeURIComponent(query)}`);
+  const data = await response.data;
+  // Filter out person results, keep only movie and tv
+  return data.results.filter(item => item.media_type === 'movie' || item.media_type === 'tv');
+};
+
+// For Movie Details
+const getMovieDetails = async (movieId) => {
+  const response = await axios.get(`${BASE_URL}/movie/${movieId}?api_key=${API_KEY}`);
+  const data = await response.data;
   return data;
 };
 
@@ -111,7 +124,7 @@ const getTVShowSeason = async (tvId, seasonNumber) => {
 };
 
 export { 
-  getPopularMovies, searchMovies, getMovieDetails, getMovieVideo, getFeaturedMovie, 
+  getPopularMovies, searchMovies, searchTVShows, searchMulti, getMovieDetails, getMovieVideo, getFeaturedMovie, 
   getTopRatedMovies, getTrendingMovies, getSimilarMovies, getMovieReviews, 
   getPopularTVShows, getTVShowDetails, getSimilarTVShows, getTVShowReviews, 
   getTVShowVideo, getTVShowSeason 
