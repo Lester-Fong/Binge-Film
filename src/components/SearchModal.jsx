@@ -1,12 +1,12 @@
 import { useState } from "react";
-import { searchMovies } from "../services/api";
+import { searchMulti } from "../services/api";
 import { Link } from "react-router-dom";
-import MovieCard from "./MovieCard";
+import MediaCard from "./MediaCard";
 
 function SearchModal({ showSearchModal, setShowSearchModal }) {
     const [searchValue, setSearchValue] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
-    const [movies, setMovies] = useState([]);
+    const [results, setResults] = useState([]);
 
     const modalStyle = {
         backgroundColor: 'rgba(250, 250, 250, 0.09)',
@@ -31,26 +31,30 @@ function SearchModal({ showSearchModal, setShowSearchModal }) {
     const handleClose = () => {
         setShowSearchModal(false);
         setSearchValue('');
-        setMovies([]);
+        setResults([]);
         setErrorMessage('');
     }
 
     const handleSearch = async (e) => {
         setSearchValue(e.target.value);
-        if (searchValue.length >= 3) {
+        if (e.target.value.length >= 3) {
             try {
-                const response = await searchMovies(searchValue);
+                const response = await searchMulti(e.target.value);
                 if (response && response.length > 0) {
-                    setMovies(response);
+                    setResults(response);
                     setErrorMessage('');
                 } else {
-                    setMovies([]);
+                    setResults([]);
                     setErrorMessage('No results found.');
                 }
             } catch (error) {
                 console.error("Error fetching search results:", error);
                 setErrorMessage('Failed to fetch search results. Please try again later.');
+                setResults([]);
             }
+        } else if (e.target.value.length < 3) {
+            setResults([]);
+            setErrorMessage('');
         }
     }
 
@@ -62,13 +66,18 @@ function SearchModal({ showSearchModal, setShowSearchModal }) {
                     <input type="text" value={searchValue} onChange={handleSearch} placeholder="Search for movies or TV shows..." className="search-input w-full p-2 rounded" />
                 </form>
                 {errorMessage && <div className="text-red-500 mt-2 text-center">{errorMessage}</div>}
-                {movies.length > 0 && (
+                {results.length > 0 && (
                     <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 px-2 py-2">
-                        {movies.map(movie => (
-                            <Link to={`/movie/${movie.id}`} key={movie.id} onClick={handleClose}>
-                                <MovieCard movie={movie} />
-                            </Link>
-                        ))}
+                        {results.map(item => {
+                            const isMovie = item.media_type === 'movie' || item.title;
+                            const linkTo = isMovie ? `/movie/${item.id}` : `/tv/${item.id}`;
+                            
+                            return (
+                                <Link to={linkTo} key={`${item.media_type}-${item.id}`} onClick={handleClose}>
+                                    <MediaCard media={item} />
+                                </Link>
+                            );
+                        })}
                     </div>
                 )}
             </div>
