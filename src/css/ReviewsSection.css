@@ -1,5 +1,12 @@
 /* ReviewsSection.css */
 
+/* Main reviews section container */
+.reviews-section {
+  /* max-width: 1200px; */
+  margin: 0 auto;
+  /* padding: 5rem 0; */
+}
+
 /* Centered item styling */
 .centered-item {
   flex: 0 0 auto;
