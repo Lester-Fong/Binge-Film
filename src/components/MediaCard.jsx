@@ -22,7 +22,7 @@ function MediaCard({ media }) {
                 )}
                 <div className="movie-overlay">
                     <div className={`media-type-badge ${!isMovie ? 'tv-badge' : ''}`}>
-                        {isMovie ? 'Movie' : 'TV Show'}
+                        {isMovie ? 'Movie' : 'TV'}
                     </div>
                 </div>
             </div>
