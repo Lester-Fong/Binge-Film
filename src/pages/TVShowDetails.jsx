@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getTVShowDetails, getSimilarTVShows, getTVShowReviews } from "../services/api";
+import { getTVShowDetails, getSimilarTVShows, getTVShowReviews, getTVShowExternalIds } from "../services/api";
+import { embedTVShow } from "../services/api.v2";
 import Backdrop from "../components/Backdrop";
 import ReviewsSection from "../components/ReviewsSection";
 import MovieSlidesSection from "../components/MovieSlidesSection";
 import EpisodeList from "../components/EpisodeList";
+import EpisodeModal from "../components/EpisodeModal";
 import '../css/TVShowDetails.css';
 
 function TVShowDetails() {
@@ -15,15 +17,61 @@ function TVShowDetails() {
     const [similarTVShowsData, setSimilarTVShowsData] = useState([]);
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [tvShowImdbId, setTvShowImdbId] = useState(null);
+
+    // Episode modal states
+    const [isEpisodeModalOpen, setIsEpisodeModalOpen] = useState(false);
+    const [selectedEpisode, setSelectedEpisode] = useState(null);
+    const [embedUrl, setEmbedUrl] = useState("");    // Function to handle episode click
+    const handleEpisodeClick = async (episode, seasonNumber) => {
+        try {
+            setSelectedEpisode({
+                ...episode,
+                seasonNumber
+            });
+            setIsEpisodeModalOpen(true);
+
+            if (!tvShowImdbId) {
+                console.error("No IMDB ID available for this TV show");
+                setEmbedUrl("");
+                return;
+            }
+
+            // Get the embed URL from the API using the TV show's IMDB ID
+            const embedResponse = await embedTVShow(tvShowImdbId, seasonNumber, episode.episode_number);
+            setEmbedUrl(embedResponse);
+        } catch (error) {
+            console.error("Error fetching episode embed:", error);
+            setEmbedUrl("");
+        }
+    };
+
+    // Function to close the episode modal
+    const handleCloseEpisodeModal = () => {
+        setIsEpisodeModalOpen(false);
+        setSelectedEpisode(null);
+        setEmbedUrl("");
+    };
 
     useEffect(() => {
         const fetchTVShowData = async () => {
             try {
                 setLoading(true);
 
-                // Fetch TV show details (required)
                 const tvShowResponse = await getTVShowDetails(id);
                 setTVShowDetails(tvShowResponse);
+
+                // Fetch TV show external IDs to get IMDB ID
+                try {
+                    const externalIdsResponse = await getTVShowExternalIds(id);
+                    if (externalIdsResponse && externalIdsResponse.imdb_id) {
+                        setTvShowImdbId(externalIdsResponse.imdb_id);
+                    } else {
+                        console.warn("No IMDB ID found for this TV show");
+                    }
+                } catch (externalIdsError) {
+                    console.warn("Failed to fetch TV show external IDs:", externalIdsError);
+                }
 
                 // Fetch reviews (optional - don't fail if no reviews)
                 try {
@@ -79,7 +127,7 @@ function TVShowDetails() {
                         <div className="tv-show-main-details">
                             <div className="title-section">
                                 <h1 className="tv-show-title">{tvShowDetails.name}</h1>
-                                
+
                                 {tvShowDetails.tagline && (
                                     <p className="tv-show-tagline">"{tvShowDetails.tagline}"</p>
                                 )}
@@ -92,7 +140,7 @@ function TVShowDetails() {
                                         <span className="meta-label">Status:</span>
                                         <span className="meta-value">{tvShowDetails.status}</span>
                                     </div>
-                                    
+
                                     <div className="meta-group">
                                         <span className="meta-label">Seasons:</span>
                                         <span className="meta-value">{tvShowDetails.number_of_seasons}</span>
@@ -160,7 +208,7 @@ function TVShowDetails() {
                                             <h3>Latest Episode</h3>
                                             <div className="episode-card-compact">
                                                 {tvShowDetails.last_episode_to_air.still_path && (
-                                                    <img 
+                                                    <img
                                                         src={`https://image.tmdb.org/t/p/w200${tvShowDetails.last_episode_to_air.still_path}`}
                                                         alt={tvShowDetails.last_episode_to_air.name}
                                                         className="episode-still-small"
@@ -192,7 +240,7 @@ function TVShowDetails() {
                                                 {tvShowDetails.networks.slice(0, 3).map(network => (
                                                     <div key={network.id} className="network-item-compact">
                                                         {network.logo_path ? (
-                                                            <img 
+                                                            <img
                                                                 src={`https://image.tmdb.org/t/p/w92${network.logo_path}`}
                                                                 alt={network.name}
                                                                 className="network-logo-small"
@@ -214,7 +262,7 @@ function TVShowDetails() {
                                                 {tvShowDetails.created_by.slice(0, 3).map(creator => (
                                                     <div key={creator.id} className="creator-item-compact">
                                                         {creator.profile_path && (
-                                                            <img 
+                                                            <img
                                                                 src={`https://image.tmdb.org/t/p/w92${creator.profile_path}`}
                                                                 alt={creator.name}
                                                                 className="creator-photo-small"
@@ -233,13 +281,26 @@ function TVShowDetails() {
                     </div>
 
                     {/* Episodes List Section */}
-                    <EpisodeList 
+                    <EpisodeList
                         tvShowId={tvShowDetails.id}
                         seasons={tvShowDetails.seasons}
                         showName={tvShowDetails.name}
+                        onEpisodeClick={handleEpisodeClick}
                     />
                 </div>
             </div>
+
+            {/* Episode Modal */}
+            {selectedEpisode && (
+                <EpisodeModal
+                    isOpen={isEpisodeModalOpen}
+                    onClose={handleCloseEpisodeModal}
+                    tvShowName={tvShowDetails.name}
+                    seasonNumber={selectedEpisode.seasonNumber}
+                    episodeNumber={selectedEpisode.episode_number}
+                    embedUrl={embedUrl}
+                />
+            )}
 
             {/* Reviews Section */}
             {reviewsData.results && reviewsData.results.length > 0 && (
@@ -248,9 +309,9 @@ function TVShowDetails() {
 
             {/* Similar TV Shows Section */}
             {similarTVShowsData && similarTVShowsData.length > 0 && (
-                <MovieSlidesSection 
-                    movies={similarTVShowsData} 
-                    title="Similar TV Shows" 
+                <MovieSlidesSection
+                    movies={similarTVShowsData}
+                    title="Similar TV Shows"
                     contentType="tv"
                 />
             )}
