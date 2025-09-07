@@ -43,7 +43,7 @@ const searchMulti = async (query) => {
   const response = await axios.get(`${BASE_URL}/search/multi?api_key=${API_KEY}&query=${encodeURIComponent(query)}`);
   const data = await response.data;
   // Filter out person results, keep only movie and tv
-  return data.results.filter(item => item.media_type === 'movie' || item.media_type === 'tv');
+  return data.results.filter((item) => item.media_type === "movie" || item.media_type === "tv");
 };
 
 // For Movie Details
@@ -80,7 +80,6 @@ const getMovieReviews = async (movieId) => {
   return data;
 };
 
-
 // ============== TV SHOWS =============>
 const getPopularTVShows = async (page = 1) => {
   const response = await axios.get(`${BASE_URL}/tv/popular?api_key=${API_KEY}&page=${page}`);
@@ -105,6 +104,13 @@ const getOnAirTVShows = async (page = 1) => {
 // For TV Show Details
 const getTVShowDetails = async (tvId) => {
   const response = await axios.get(`${BASE_URL}/tv/${tvId}?api_key=${API_KEY}`);
+  const data = await response.data;
+  return data;
+};
+
+// For TV Show External IDs (to get IMDB ID)
+const getTVShowExternalIds = async (tvId) => {
+  const response = await axios.get(`${BASE_URL}/tv/${tvId}/external_ids?api_key=${API_KEY}`);
   const data = await response.data;
   return data;
 };
@@ -137,9 +143,11 @@ const getTVShowSeason = async (tvId, seasonNumber) => {
   return data;
 };
 
-export { 
-  getPopularMovies, searchMovies, searchTVShows, searchMulti, getMovieDetails, getMovieVideo, getFeaturedMovie, 
-  getTopRatedMovies, getTrendingMovies, getSimilarMovies, getMovieReviews, 
-  getPopularTVShows, getTopRatedTVShows, getOnAirTVShows, getTVShowDetails, getSimilarTVShows, getTVShowReviews, 
-  getTVShowVideo, getTVShowSeason 
+// For Episode External IDs (to get IMDB ID)
+const getEpisodeExternalIds = async (tvId, seasonNumber, episodeNumber) => {
+  const response = await axios.get(`${BASE_URL}/tv/${tvId}/season/${seasonNumber}/episode/${episodeNumber}/external_ids?api_key=${API_KEY}`);
+  const data = await response.data;
+  return data;
 };
+
+export { getPopularMovies, searchMovies, searchTVShows, searchMulti, getMovieDetails, getMovieVideo, getFeaturedMovie, getTopRatedMovies, getTrendingMovies, getSimilarMovies, getMovieReviews, getPopularTVShows, getTopRatedTVShows, getOnAirTVShows, getTVShowDetails, getTVShowExternalIds, getSimilarTVShows, getTVShowReviews, getTVShowVideo, getTVShowSeason, getEpisodeExternalIds };
