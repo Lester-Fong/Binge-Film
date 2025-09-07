@@ -16,9 +16,9 @@ function Backdrop(props) {
     const [showFilmModal, setShowFilmModal] = useState(false);
 
     // Determine if this is a movie or TV show
-    const isMovie = props.contentType === 'movie' || props.movie.hasOwnProperty('title');
-    const isTVShow = props.contentType === 'tv' || props.movie.hasOwnProperty('name');
-    
+    const isMovie = props.contentType === 'movie' || Object.prototype.hasOwnProperty.call(props.movie, 'title');
+    // const isTVShow = props.contentType === 'tv' || props.movie.hasOwnProperty('name');
+
     // Get display values dynamically
     const displayTitle = isMovie ? props.movie.title : props.movie.name;
     const releaseDate = isMovie ? props.movie.release_date : props.movie.first_air_date;
@@ -37,8 +37,8 @@ function Backdrop(props) {
         e.preventDefault();
         try {
             // Use appropriate API based on content type
-            const response = isMovie ? 
-                await getMovieVideo(props.movie.id) : 
+            const response = isMovie ?
+                await getMovieVideo(props.movie.id) :
                 await getTVShowVideo(props.movie.id);
             let results = response.results;
             if (results.length > 0) {
