@@ -127,6 +127,10 @@
   background-color: rgba(59, 130, 246, 0.9); /* Blue for TV shows */
 }
 
+.movie-badge {
+  background-color: rgba(239, 68, 68, 0.9); /* Blue for TV shows */
+}
+
 .no-poster-placeholder {
   width: 100%;
   height: 100%;
