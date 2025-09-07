@@ -1,15 +1,15 @@
-const LIST_MOVIES_ENDPOINT = import.meta.env.VITE_VIDSRC_LIST_MOVIES_ENDPOINT;
 const EMBED_MOVIES_ENDPOINT = import.meta.env.VITE_VIDSRC_ENDPOINT;
+const EMBED_TV_ENDPOINT = import.meta.env.VITE_VIDSRC_TV_ENDPOINT;
 import axios from "axios";
-
-const getPopularMovies = async (pageCount) => {
-  const response = await axios.get(`${LIST_MOVIES_ENDPOINT}/page-${pageCount}.json`);
-  return response.data.result; // Ensure we return an empty array if results are undefined
-};
 
 const embedMovie = async (movieID) => {
   const response = await axios.get(`${EMBED_MOVIES_ENDPOINT}?imdb=${movieID}&ds_lang=en`);
   return response.data;
 };
 
-export { getPopularMovies, embedMovie };
+const embedTVShow = async (tvshowID, seasonCount, numberCount) => {
+  const response = await axios.get(`${EMBED_TV_ENDPOINT}?imdb=${tvshowID}&season=${seasonCount}&episode=${numberCount}&ds_lang=en`);
+  return response.data;
+};
+
+export { embedMovie, embedTVShow };
