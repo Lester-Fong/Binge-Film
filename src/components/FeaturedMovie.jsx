@@ -4,7 +4,7 @@ import { getMovieVideo } from "../services/api";
 import { useState } from "react";
 import TrailerModal from "./TrailerModal";
 import { Link } from 'react-router-dom';
-import { handleDate } from '../services/helper';
+import { fromatDate } from '../services/helper';
 
 function FeaturedMovie(props) {
     const { isFavorite, addToFavorites, removeToFavorites } = useMovieContext();
@@ -45,7 +45,7 @@ function FeaturedMovie(props) {
         <div className="featured-movie" style={{ backgroundImage: `url(https://media.themoviedb.org/t/p/w1920_and_h800_multi_faces/${props.movie.backdrop_path})` }}>
             <div className='featured-movie-content'>
                 <h4 className='text-7xl lg:text-6xl md:text-5xl sm:text-4xl mb-1'>{props.movie.title}</h4>
-                <p className="text-sm md:text-base">Release Date: {handleDate(props.movie.release_date)}</p>
+                <p className="text-sm md:text-base">Release Date: {fromatDate(props.movie.release_date)}</p>
                 <p className='my-2 text-xl md:text-lg sm:text-base'>{props.movie.overview}</p>
                 <div className="backdrop-icons flex flex-wrap gap-3 sm:gap-2">
                     <Link className="watch-btn pointer" to={`/movie/${props.movie.id}`} >

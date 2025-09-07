@@ -6,7 +6,7 @@ import {
     CarouselNext,
     CarouselPrevious,
 } from "@/components/ui/carousel";
-import { handleDate, truncateText } from "../services/helper";
+import { fromatDate, truncateText } from "../services/helper";
 import "../css/ReviewsSection.css";
 
 function ReviewsSection({ reviews }) {
@@ -52,7 +52,7 @@ function ReviewsSection({ reviews }) {
                                                 {renderRating(review.author_details.rating)}
                                             </div>
                                             <p className="review-date">
-                                                {handleDate(review.created_at)}
+                                                {fromatDate(review.created_at)}
                                             </p>
                                         </CardHeader>
                                         <CardContent className="review-content">
@@ -100,7 +100,7 @@ function ReviewsSection({ reviews }) {
                                                 {renderRating(review.author_details.rating)}
                                             </div>
                                             <p className="review-date">
-                                                {handleDate(review.created_at)}
+                                                {fromatDate(review.created_at)}
                                             </p>
                                         </CardHeader>
                                         <CardContent className="review-content">

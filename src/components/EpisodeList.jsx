@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { getTVShowSeason } from "../services/api";
 import '../css/EpisodeList.css';
-import { handleDate } from "../services/helper";
+import { fromatDate } from "../services/helper";
 
 function EpisodeList({ tvShowId, seasons, showName, onEpisodeClick }) {
     const [selectedSeason, setSelectedSeason] = useState(1);
@@ -126,7 +126,7 @@ function EpisodeList({ tvShowId, seasons, showName, onEpisodeClick }) {
                                         </div>
                                         <div className="episode-meta">
                                             {episode.air_date && (
-                                                <span className="episode-date">{handleDate(episode.air_date)}</span>
+                                                <span className="episode-date">{fromatDate(episode.air_date)}</span>
                                             )}
                                             {episode.vote_average > 0 && (
                                                 <div className="episode-rating">
