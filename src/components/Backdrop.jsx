@@ -1,5 +1,5 @@
 import "../css/MovieDetails.css";
-import { handleDate } from "../services/helper";
+import { fromatDate } from "../services/helper";
 import { useMovieContext } from "../contexts/MovieContext";
 import { getMovieVideo, getTVShowVideo } from "../services/api";
 import { embedMovie } from "../services/api.v2";
@@ -88,7 +88,7 @@ function Backdrop(props) {
                                 {displayTitle} ({releaseYear})
                             </h1>
                             <p>Tagline: &nbsp; "{props.movie.tagline}"</p>
-                            <p>{isMovie ? 'Release Date' : 'First Air Date'}: {handleDate(releaseDate)}</p>
+                            <p>{isMovie ? 'Release Date' : 'First Air Date'}: {fromatDate(releaseDate)}</p>
                         </div>
                         <div className="backdrop-icons justify-center">
                             <div className="watch-btn pointer" onClick={handlePlayFilm}>
