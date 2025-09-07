@@ -87,7 +87,7 @@ function SearchModal({ showSearchModal, setShowSearchModal }) {
                     <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 px-2 py-2">
                         {results.map(item => {
                             const isMovie = item.media_type === 'movie' || item.title;
-                            const linkTo = isMovie ? `/movie/${item.id}` : `/tv/${item.id}`;
+                            const linkTo = isMovie ? `/movie/${item.id}` : `/tvshow/${item.id}`;
 
                             return (
                                 <Link to={linkTo} key={`${item.media_type}-${item.id}`} onClick={handleClose}>
