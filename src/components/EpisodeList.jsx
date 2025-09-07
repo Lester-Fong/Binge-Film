@@ -3,32 +3,32 @@ import { getTVShowSeason } from "../services/api";
 import '../css/EpisodeList.css';
 import { handleDate } from "../services/helper";
 
-function EpisodeList({ tvShowId, seasons, showName }) {
+function EpisodeList({ tvShowId, seasons, showName, onEpisodeClick }) {
     const [selectedSeason, setSelectedSeason] = useState(1);
     const [episodes, setEpisodes] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
     useEffect(() => {
+        const fetchEpisodes = async () => {
+            try {
+                setLoading(true);
+                setError(null);
+                const seasonData = await getTVShowSeason(tvShowId, selectedSeason);
+                setEpisodes(seasonData.episodes || []);
+            } catch (error) {
+                console.error("Error fetching episodes:", error);
+                setError("Failed to load episodes for this season.");
+                setEpisodes([]);
+            } finally {
+                setLoading(false);
+            }
+        };
+
         if (tvShowId && selectedSeason) {
             fetchEpisodes();
         }
     }, [tvShowId, selectedSeason]);
-
-    const fetchEpisodes = async () => {
-        try {
-            setLoading(true);
-            setError(null);
-            const seasonData = await getTVShowSeason(tvShowId, selectedSeason);
-            setEpisodes(seasonData.episodes || []);
-        } catch (error) {
-            console.error("Error fetching episodes:", error);
-            setError("Failed to load episodes for this season.");
-            setEpisodes([]);
-        } finally {
-            setLoading(false);
-        }
-    };
 
     const handleSeasonChange = (seasonNumber) => {
         setSelectedSeason(seasonNumber);
@@ -45,21 +45,21 @@ function EpisodeList({ tvShowId, seasons, showName }) {
                 <div className="season-selector-premium">
                     <div className="season-selector-wrapper">
                         <div className="season-dropdown-wrapper">
-                            <select 
+                            <select
                                 id="select-premium"
-                                value={selectedSeason} 
+                                value={selectedSeason}
                                 onChange={(e) => handleSeasonChange(parseInt(e.target.value))}
                                 className="season-dropdown-premium"
                             >
                                 {seasons.map((season) => (
                                     season.season_number !== 0 ? <option key={season.season_number} value={season.season_number}>
                                         Season {season.season_number}
-                                    </option> : <></>
+                                    </option> : null
                                 ))}
                             </select>
                             <div className="season-dropdown-arrow">
                                 <svg width="12" height="8" viewBox="0 0 12 8" fill="none">
-                                    <path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                                    <path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                                 </svg>
                             </div>
                         </div>
@@ -83,10 +83,14 @@ function EpisodeList({ tvShowId, seasons, showName }) {
                 <div className="episodes-container">
                     <div className="episodes-grid">
                         {episodes.map((episode, index) => (
-                            <div key={episode.id || index} className="episode-card">
+                            <div
+                                key={episode.id || index}
+                                className="episode-card"
+                                onClick={() => onEpisodeClick(episode, selectedSeason)}
+                            >
                                 <div className="episode-thumbnail">
                                     {episode.still_path ? (
-                                        <img 
+                                        <img
                                             src={`https://image.tmdb.org/t/p/w400${episode.still_path}`}
                                             alt={episode.name}
                                             className="episode-image"
@@ -95,7 +99,7 @@ function EpisodeList({ tvShowId, seasons, showName }) {
                                         <div className="episode-placeholder">
                                             <div className="placeholder-icon">
                                                 <svg width="48" height="48" viewBox="0 0 24 24" fill="currentColor">
-                                                    <path d="M21 3H3c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H3V5h18v14zm-10-7.5v6l5.5-3-5.5-3z"/>
+                                                    <path d="M21 3H3c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H3V5h18v14zm-10-7.5v6l5.5-3-5.5-3z" />
                                                 </svg>
                                             </div>
                                         </div>
@@ -103,7 +107,7 @@ function EpisodeList({ tvShowId, seasons, showName }) {
                                     <div className="episode-overlay">
                                         <div className="play-button">
                                             <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
-                                                <path d="M8 5v14l11-7L8 5z"/>
+                                                <path d="M8 5v14l11-7L8 5z" />
                                             </svg>
                                         </div>
                                     </div>
@@ -113,7 +117,7 @@ function EpisodeList({ tvShowId, seasons, showName }) {
                                         </div>
                                     )}
                                 </div>
-                                
+
                                 <div className="episode-content">
                                     <div className="episode-header">
                                         <div className="episode-title-row">
@@ -127,14 +131,14 @@ function EpisodeList({ tvShowId, seasons, showName }) {
                                             {episode.vote_average > 0 && (
                                                 <div className="episode-rating">
                                                     <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
-                                                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                                                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
                                                     </svg>
                                                     <span>{episode.vote_average.toFixed(1)}</span>
                                                 </div>
                                             )}
                                         </div>
                                     </div>
-                                    
+
                                     {episode.overview && (
                                         <p className="episode-overview">{episode.overview}</p>
                                     )}
