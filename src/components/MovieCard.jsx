@@ -13,13 +13,13 @@ export default function MovieCard({ movie, contentType }) {
     // Determine if this is a movie or TV show and extract the appropriate data
     const isMovie = contentType === 'movie' || movie.hasOwnProperty('title');
     const isTVShow = contentType === 'tv' || movie.hasOwnProperty('name');
-    
+
     // Get title/name dynamically
     const displayTitle = isMovie ? movie.title : movie.name;
-    
+
     // Get release date dynamically
     const releaseDate = isMovie ? movie.release_date : movie.first_air_date;
-    
+
     // Get the year from the date
     const releaseYear = releaseDate ? releaseDate.split('-')[0] : 'N/A';
 
@@ -39,9 +39,9 @@ export default function MovieCard({ movie, contentType }) {
                 <div className="movie-overlay">
                     <button className={`favorite-btn ${favorite ? 'active' : ''}`} onClick={onFavoriteClick}>♥</button>
                     {/* Add a small indicator to show if it's a TV show */}
-                    {isTVShow && (
+                    {isTVShow ? (
                         <span className="content-type-badge tv-badge">TV</span>
-                    )}
+                    ) : (<span className="content-type-badge movie-badge">Movie</span>)}
                 </div>
             </div>
             <div className="movie-info">
