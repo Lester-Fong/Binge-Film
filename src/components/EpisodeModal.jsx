@@ -1,38 +1,30 @@
+// TODO!! ACCOMODATE THE EMBED RESPONSE VIDEO
 import { useMemo, useEffect } from "react";
 
 function EpisodeModal({ isOpen, onClose, tvShowName, seasonNumber, episodeNumber, embedUrl }) {
-    console.log("EpisodeModal received embedUrl:", embedUrl);
-
-    // Extract the actual video URL from the nested iframe if needed
+    // Extract the actual video URL from the nested iframe
     const videoSrc = useMemo(() => {
         if (!embedUrl) return '';
 
         try {
-            // If the embedUrl is already a direct video source, use it
-            if (typeof embedUrl === 'string') {
-                return embedUrl;
-            }
-
-            // If it's an HTML response, try to extract the iframe
-            if (typeof embedUrl === 'object' || embedUrl.includes('<iframe')) {
-                const iframeMatch = embedUrl.match(/src="([^"]*cloudnestra\.com[^"]*)"/);
-                if (iframeMatch && iframeMatch[1]) {
-                    let src = iframeMatch[1];
-                    // If it starts with //, add https:
-                    if (src.startsWith('//')) {
-                        src = 'https:' + src;
-                    }
-                    console.log("Extracted video src:", src);
-                    return src;
-                } else {
-                    console.log("No cloudnestra iframe found in response");
+            // Look for the iframe src in the HTML content
+            const iframeMatch = embedUrl.match(/src="([^"]*cloudnestra\.com[^"]*)"/);
+            if (iframeMatch && iframeMatch[1]) {
+                let src = iframeMatch[1];
+                // If it starts with //, add https:
+                if (src.startsWith('//')) {
+                    src = 'https:' + src;
                 }
+                return src;
+            } else {
+                console.log("No cloudnestra iframe found in response");
+                console.log("Response content:", embedUrl.substring(0, 500) + "...");
             }
         } catch (error) {
             console.error("Error extracting video src:", error);
         }
 
-        return embedUrl || '';
+        return '';
     }, [embedUrl]);
 
     // Fallback: Create a simplified HTML version with fixed URLs
@@ -111,19 +103,16 @@ function EpisodeModal({ isOpen, onClose, tvShowName, seasonNumber, episodeNumber
         }
     }, [isOpen]);
 
-    // Generate title with season and episode numbers
+    // Generate episode title
     const episodeTitle = `${tvShowName} - Season ${seasonNumber}, Episode ${episodeNumber}`;
 
     return (
         <div className={`episode-modal fixed inset-0 z-150 flex items-center justify-center bg-gray-900 bg-opacity-75 ${isOpen ? 'block' : 'hidden'}`}>
-            <button className="absolute top-4 right-4 z-50 bg-red-600 hover:bg-red-700 text-white w-10 h-10 rounded-full flex items-center justify-center text-xl font-bold" onClick={handleCloseModal}>
+            <button className="bg-yellow-600 absolute -top-px right-0 z-50 rounded-full" onClick={handleCloseModal}>
                 X
             </button>
-            <div className="episode-modal-content relative w-full h-full max-w-6xl max-h-4xl bg-black rounded-lg shadow-lg overflow-hidden mx-4">
-                <div className="episode-title bg-gray-900 text-white py-3 px-4 text-center font-semibold">
-                    {episodeTitle}
-                </div>
-                <div className="episode-container w-full h-full">
+            <div className="episode-modal-content relative w-full h-full max-h-4xl bg-white rounded-lg shadow-lg overflow-hidden">
+                <div className="film-container">
                     {embedUrl && videoSrc ? (
                         <iframe
                             key={isOpen ? 'video-playing' : 'video-stopped'}
@@ -135,7 +124,6 @@ function EpisodeModal({ isOpen, onClose, tvShowName, seasonNumber, episodeNumber
                             src={videoSrc}
                             referrerPolicy="no-referrer"
                             onError={(e) => console.log("Iframe error:", e)}
-                            onLoad={() => console.log("Iframe loaded successfully")}
                         ></iframe>
                     ) : embedUrl && fallbackHTML ? (
                         <iframe
@@ -147,14 +135,12 @@ function EpisodeModal({ isOpen, onClose, tvShowName, seasonNumber, episodeNumber
                             height="100%"
                             srcDoc={fallbackHTML}
                             referrerPolicy="no-referrer"
-                            allowFullScreen
                             onError={(e) => console.log("Fallback iframe error:", e)}
-                            onLoad={() => console.log("Fallback iframe loaded")}
                         ></iframe>
                     ) : (
-                        <div className="flex items-center justify-center h-full flex-col bg-gray-800 text-white p-6">
-                            <p className="text-xl mb-4">
-                                {embedUrl ? 'Unable to load video player in modal' : 'Loading video player...'}
+                        <div className="flex items-center justify-center h-full flex-col">
+                            <p className="text-black mb-4">
+                                {embedUrl ? 'Unable to load video player in modal' : 'Loading video...'}
                             </p>
                             {videoSrc && (
                                 <div className="flex flex-col gap-2">
@@ -167,7 +153,7 @@ function EpisodeModal({ isOpen, onClose, tvShowName, seasonNumber, episodeNumber
                                     <button
                                         onClick={() => {
                                             console.log("Video src:", videoSrc);
-                                            console.log("Response URL:", embedUrl);
+                                            console.log("Response HTML:", embedUrl.substring(0, 1000));
                                         }}
                                         className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-1 px-2 rounded text-sm"
                                     >
