@@ -11,8 +11,8 @@ export default function MovieCard({ movie, contentType }) {
     const favorite = isFavorite(movie.id);
 
     // Determine if this is a movie or TV show and extract the appropriate data
-    const isMovie = contentType === 'movie' || movie.hasOwnProperty('title');
-    const isTVShow = contentType === 'tv' || movie.hasOwnProperty('name');
+    const isMovie = contentType === 'movie' || Object.prototype.hasOwnProperty.call(movie, 'title');
+    const isTVShow = contentType === 'tv' || Object.prototype.hasOwnProperty.call(movie, 'name');
 
     // Get title/name dynamically
     const displayTitle = isMovie ? movie.title : movie.name;
