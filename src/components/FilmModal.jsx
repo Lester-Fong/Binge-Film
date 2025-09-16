@@ -1,8 +1,6 @@
 import { useMemo, useEffect } from "react";
 
 function FilmModal({ showFilmModal, setShowFilmModal, props, response }) {
-    console.log("FilmModal received response:", response);
-
     // Extract the actual video URL from the nested iframe
     const videoSrc = useMemo(() => {
         if (!response) return '';
@@ -16,8 +14,6 @@ function FilmModal({ showFilmModal, setShowFilmModal, props, response }) {
                 if (src.startsWith('//')) {
                     src = 'https:' + src;
                 }
-                console.log("Extracted video src:", src);
-                console.log("Original HTML response length:", response.length);
                 return src;
             } else {
                 console.log("No cloudnestra iframe found in response");
@@ -125,7 +121,6 @@ function FilmModal({ showFilmModal, setShowFilmModal, props, response }) {
                             src={videoSrc}
                             referrerPolicy="no-referrer"
                             onError={(e) => console.log("Iframe error:", e)}
-                            onLoad={() => console.log("Iframe loaded successfully")}
                         ></iframe>
                     ) : response && fallbackHTML ? (
                         <iframe
@@ -138,7 +133,6 @@ function FilmModal({ showFilmModal, setShowFilmModal, props, response }) {
                             srcDoc={fallbackHTML}
                             referrerPolicy="no-referrer"
                             onError={(e) => console.log("Fallback iframe error:", e)}
-                            onLoad={() => console.log("Fallback iframe loaded")}
                         ></iframe>
                     ) : (
                         <div className="flex items-center justify-center h-full flex-col">
