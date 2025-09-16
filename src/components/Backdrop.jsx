@@ -61,9 +61,7 @@ function Backdrop(props) {
     const handlePlayFilm = async (e) => {
         e.preventDefault();
         try {
-            console.log("Fetching embed for movie ID:", props.movie.imdb_id);
             const response = await embedMovie(props.movie.imdb_id);
-            console.log("Received embed response:", response);
             setEmbedVideo(response);
             setShowFilmModal(true)
         } catch (error) {
