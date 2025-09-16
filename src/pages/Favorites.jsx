@@ -8,12 +8,17 @@ function Favorites() {
 
     if (favorites.length > 0) {
         return <div className='favorites'>
-            <h2>Your Favorites</h2>
+            <p className='font-semibold text-4xl mt-5 mb-2 px-4 bg-accent-foreground'>Your Favorites</p>
             <div className="movies-grid">
                 {favorites.map(item =>
-                    <Link to={`/movie/${item.id}`} key={item.id} className="movie-link">
-                        <MovieCard key={item.id} movie={item} />
-                    </Link>
+                    item.media_type !== 'movie' ?
+                        <Link to={`/tvshow/${item.id}`} key={item.id} className="tvshow-link">
+                            <MovieCard key={item.id} movie={item} contentType="tv" />
+                        </Link>
+                        :
+                        <Link to={`/movie/${item.id}`} key={item.id} className="movie-link">
+                            <MovieCard key={item.id} movie={item} />
+                        </Link>
                 )}
             </div>
         </div>
