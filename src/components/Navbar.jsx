@@ -14,8 +14,6 @@ function Navbar() {
     const closeMobileMenu = () => {
         setIsMobileMenuOpen(false);
     };
-
-    console.log("Navbar rendered", showSearchModal);
     return (
         <>
             <nav className="navbar">
