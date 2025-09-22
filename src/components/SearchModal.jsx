@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { searchMulti } from "../services/api";
 import { Link } from "react-router-dom";
 import MediaCard from "./MediaCard";
@@ -58,12 +58,28 @@ function SearchModal({ showSearchModal, setShowSearchModal }) {
         }
     }
 
+    // Then replace the $SELECTION_PLACEHOLDER$ with:
+    const inputRef = useRef(null);
+
+    useEffect(() => {
+        if (showSearchModal && inputRef.current) {
+            inputRef.current.focus();
+        }
+    }, [showSearchModal]);
+
     return (<>
         <div style={showSearchModal ? overlayStyle : {}} onClick={handleClose}></div>
         <div onClose={() => setShowSearchModal(false)} style={modalStyle} className={`w-5/12 top-2/12 left-3/10 fixed z-150 ${showSearchModal ? 'block' : 'hidden'}`}>
             <div className="py-2">
                 <form className="search-form">
-                    <input type="text" value={searchValue} onChange={handleSearch} placeholder="Search for movies or TV shows..." className="search-input w-full p-2 rounded" />
+                    <input
+                        ref={inputRef}
+                        type="text"
+                        value={searchValue}
+                        onChange={handleSearch}
+                        placeholder="Search for movies or TV shows..."
+                        className="search-input w-full p-2 rounded"
+                    />
                 </form>
                 {errorMessage && <div className="text-red-500 mt-2 text-center">{errorMessage}</div>}
                 {results.length > 0 && (
@@ -71,7 +87,7 @@ function SearchModal({ showSearchModal, setShowSearchModal }) {
                         {results.map(item => {
                             const isMovie = item.media_type === 'movie' || item.title;
                             const linkTo = isMovie ? `/movie/${item.id}` : `/tvshow/${item.id}`;
-                            
+
                             return (
                                 <Link to={linkTo} key={`${item.media_type}-${item.id}`} onClick={handleClose}>
                                     <MediaCard media={item} />

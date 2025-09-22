@@ -1,9 +1,6 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import MovieCard from "../components/MovieCard";
-import { getPopularMovies, getFeaturedMovie, getTopRatedMovies, getTrendingMovies, getPopularTVShows} from "../services/api";
+import { getPopularMovies, getFeaturedMovie, getTopRatedMovies, getTrendingMovies, getPopularTVShows } from "../services/api";
 import '../css/Home.css'
-import FeaturedMovie from "../components/FeaturedMovie";
 import FeaturedMovieCarousel from "../components/FeaturedMovieCarousel";
 import MovieSlidesSection from "../components/MovieSlidesSection";
 
@@ -72,10 +69,10 @@ function Home() {
     */
 
     // Alternative optimized approach - you can replace the above useEffect with this:
-    
+
     useEffect(() => {
         let isMounted = true; // Prevent state updates if component unmounts
-        
+
         const loadMovieData = async () => {
             // Set loading state immediately
             setLoading(true);
@@ -83,28 +80,28 @@ function Home() {
 
             // Create a map to track which API calls are completed
             const apiCalls = [
-                { 
-                    name: 'popular', 
+                {
+                    name: 'popular',
                     promise: getPopularMovies(),
-                    setter: setMovies 
+                    setter: setMovies
                 },
-                { 
-                    name: 'featured', 
+                {
+                    name: 'featured',
                     promise: getFeaturedMovie(),
-                    setter: setFeaturedMovie 
+                    setter: setFeaturedMovie
                 },
-                { 
-                    name: 'topRated', 
+                {
+                    name: 'topRated',
                     promise: getTopRatedMovies(),
-                    setter: setTopRatedMovies 
+                    setter: setTopRatedMovies
                 },
-                { 
-                    name: 'trending', 
+                {
+                    name: 'trending',
                     promise: getTrendingMovies(),
-                    setter: setTrendingMovies 
+                    setter: setTrendingMovies
                 },
-                { 
-                    name: 'tv', 
+                {
+                    name: 'tv',
                     promise: getPopularTVShows(),
                     setter: (data) => setPopularTV(data.results || [])
                 }
@@ -121,7 +118,7 @@ function Home() {
                     if (isMounted) {
                         setter(data);
                         completedCalls++;
-                        
+
                         // Update loading state progressively
                         if (completedCalls === totalCalls && !hasAnyError) {
                             setLoading(false);
@@ -130,12 +127,12 @@ function Home() {
                 } catch (error) {
                     hasAnyError = true;
                     console.warn(`Failed to load ${name}:`, error);
-                    
+
                     if (isMounted) {
                         completedCalls++;
                         // Set empty array as fallback
                         setter([]);
-                        
+
                         // If this is the last call, stop loading even with errors
                         if (completedCalls === totalCalls) {
                             setLoading(false);
@@ -149,14 +146,14 @@ function Home() {
 
             // Wait for all promises to complete (but don't fail if some fail)
             await Promise.allSettled(promises);
-            
+
             if (isMounted) {
                 setLoading(false);
             }
         };
 
         loadMovieData();
-        
+
         // Cleanup function to prevent state updates after unmount
         return () => {
             isMounted = false;
@@ -176,10 +173,10 @@ function Home() {
     //             ];
 
     //             const results = await Promise.allSettled(fetchPromises);
-                
+
     //             // Process results with individual error handling
     //             const [popularResult, featuredResult, topRatedResult, trendingResult, tvResult] = results;
-                
+
     //             // Set data only if fetch was successful, otherwise use empty array
     //             if (popularResult.status === 'fulfilled' && !popularResult.value.error) {
     //                 setMovies(popularResult.value.data || popularResult.value);

@@ -14,7 +14,7 @@ function FeaturedMovieCarousel({ movies }) {
             setCurrentIndex((prevIndex) =>
                 prevIndex === movies.length - 1 ? 0 : prevIndex + 1
             );
-        }, 4500); // Change slide every 5 seconds
+        }, 3300); // Change slide every 3 seconds
 
         return () => clearInterval(interval);
     }, [isAutoPlaying, movies]);
@@ -23,8 +23,8 @@ function FeaturedMovieCarousel({ movies }) {
     const goToSlide = (index) => {
         setCurrentIndex(index);
         setIsAutoPlaying(false); // Pause autoplay when user interacts
-        // Resume autoplay after 10 seconds of inactivity
-        setTimeout(() => setIsAutoPlaying(true), 10000);
+        // Resume autoplay after 3 seconds of inactivity
+        setTimeout(() => setIsAutoPlaying(true), 3300);
     };
 
     // Handle mouse events for autoplay control
